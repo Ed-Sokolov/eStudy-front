@@ -1,0 +1,31 @@
+.header {
+  background: #347f6d;
+  color: white;
+  border-radius: 0 0 16px 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 30px rgba(52,127,109,.4);
+
+  .header__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 64px;
+    padding: 16px 0;
+
+    .nav {
+      flex-grow: 1;
+
+      .menu {
+        align-items: center;
+      }
+    }
+
+    .logo__wrapper {
+      svg {
+        path {
+          fill: #fff;
+        }
+      }
+    }
+  }
+}
