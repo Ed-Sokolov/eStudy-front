@@ -5,7 +5,7 @@
   overflow: hidden;
   box-shadow: 0 4px 30px rgba(52,127,109,.4);
 
-  .header__inner {
+  &__inner {
     display: flex;
     justify-content: space-between;
     align-items: center;

@@ -29,6 +29,17 @@ ul {
   list-style: none;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+  padding: 0;
+}
+
 img {
   vertical-align: center;
 }
@@ -42,4 +53,15 @@ img {
 .menu {
   display: flex;
   gap: 8px;
+}
+
+.app-inner {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+
+  & > main {
+    flex-grow: 1;
+  }
 }
