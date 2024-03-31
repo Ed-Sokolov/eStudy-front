@@ -38,16 +38,3 @@
     background: #256757;
   }
 }
-
-.room-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 32px 16px;
-
-  padding: 64px 0;
-
-  & > .room {
-    flex-basis: 33%;
-  }
-}
