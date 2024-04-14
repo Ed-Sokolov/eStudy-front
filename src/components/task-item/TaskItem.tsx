@@ -23,7 +23,7 @@ export const TaskItem: React.FC<TTaskItem> = (
 
             <p className="task-item__category">{category}</p>
 
-            <NavLink to={`/tasks/${id}`} className={'task-item__link'} />
+            <NavLink to={`/rooms/${id}/tasks/${id}`} className={'task-item__link'} />
         </div>
     )
 }
