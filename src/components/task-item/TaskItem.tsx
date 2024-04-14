@@ -1,6 +1,7 @@
 import React from "react";
 import "./task-item.scss";
 import {type TTaskItem} from "../../type/TaskItem";
+import {NavLink} from "react-router-dom";
 
 export const TaskItem: React.FC<TTaskItem> = (
     {
@@ -22,7 +23,7 @@ export const TaskItem: React.FC<TTaskItem> = (
 
             <p className="task-item__category">{category}</p>
 
-            <a href={id.toString()} className="task-item__link"></a>
+            <NavLink to={`/tasks/${id}`} className={'task-item__link'} />
         </div>
     )
 }

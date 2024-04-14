@@ -14,7 +14,7 @@ export const Room: React.FC<TRoom> = (
         <div className="room">
             <h2 className="room__title">{title}</h2>
             <p className="room__author">{author}</p>
-            <NavLink to={'/rooms/1'} className={'room__link'}></NavLink>
+            <NavLink to={`/rooms/${id}`} className={'room__link'} />
         </div>
     )
 }
