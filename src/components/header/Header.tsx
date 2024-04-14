@@ -1,6 +1,7 @@
 import React from "react";
 import "./header.scss";
 import {ReactComponent as Logo} from "../../assets/img/logo.svg";
+import {NavLink} from "react-router-dom";
 
 export const Header: React.FC = () => {
     return (
@@ -13,8 +14,16 @@ export const Header: React.FC = () => {
 
                     <nav className="nav">
                         <ul className="menu">
-                            <li className="menu__item">Main</li>
-                            <li className="menu__item">Rooms</li>
+                            <li className="menu__item">
+                                <NavLink to={'/'}>
+                                    Main
+                                </NavLink>
+                            </li>
+                            <li className="menu__item">
+                                <NavLink to={'/rooms'}>
+                                    Rooms
+                                </NavLink>
+                            </li>
                         </ul>
                     </nav>
 

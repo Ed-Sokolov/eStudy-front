@@ -1,8 +1,7 @@
 import React from 'react';
 import "./app.scss";
 import {HeaderContainer} from "./components/header/HeaderContainer";
-import {RoomsContainer} from "./components/rooms/RoomsContainer";
-import {TasksContainer} from "./components/tasks/TasksContainer";
+import {Router} from "./components/routes/Routes";
 
 const App: React.FC = () => {
     return (
@@ -10,8 +9,7 @@ const App: React.FC = () => {
           <HeaderContainer/>
 
           <main>
-              <RoomsContainer />
-              <TasksContainer />
+              <Router />
           </main>
       </div>
   )
