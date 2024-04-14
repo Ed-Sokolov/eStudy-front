@@ -29,6 +29,11 @@ ul {
   list-style: none;
 }
 
+img,
+svg {
+  display: flex;
+}
+
 h1,
 h2,
 h3,
@@ -52,7 +57,7 @@ img {
 
 .menu {
   display: flex;
-  gap: 8px;
+  gap: 16px;
 }
 
 .app-inner {
@@ -77,4 +82,27 @@ img {
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
+}
+
+.link {
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    background: #fff;
+    border-radius: 0;
+    left: 0;
+    top: 110%;
+    transition: width .3s, border-radius .3s;
+  }
+
+  &:hover {
+    &::before {
+      width: 100%;
+      border-radius: 2px;
+    }
+  }
 }

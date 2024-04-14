@@ -4,6 +4,8 @@
   border-radius: 0 0 16px 16px;
   overflow: hidden;
   box-shadow: 0 4px 30px rgba(52,127,109,.4);
+  font-size: 18px;
+  letter-spacing: 0.8px;
 
   &__inner {
     display: flex;
@@ -24,6 +26,20 @@
       svg {
         path {
           fill: #fff;
+        }
+      }
+    }
+  }
+
+  &__log {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    .vertical-divider {
+      svg {
+        path {
+          stroke: #fff;
         }
       }
     }
