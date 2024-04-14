@@ -24,6 +24,11 @@ export const RoomsContainer: React.FC = () => {
             title: 'Front-End',
             author: 'Sokolov E.O.'
         },
+        {
+            id: 5,
+            title: 'Computer Networks',
+            author: 'Sokolov E.O.'
+        },
     ]
 
     return (

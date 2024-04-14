@@ -10,7 +10,7 @@ const App: React.FC = () => {
           <HeaderContainer/>
 
           <main>
-              {/*<RoomsContainer />*/}
+              <RoomsContainer />
               <TasksContainer />
           </main>
       </div>
