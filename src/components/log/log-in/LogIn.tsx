@@ -34,7 +34,7 @@ export const LogIn: React.FC<TLogForm<TLogInForm>> = (
 
                                     <div className="checkbox-group">
                                         <label htmlFor="checkbox">Remember Me</label>
-                                        <Field type={'checkbox'} name={'checkbox'} id={'checkbox'}/>
+                                        <Field type={'checkbox'} name={'remember'} id={'checkbox'}/>
                                     </div>
 
                                     <div className="form-group">
