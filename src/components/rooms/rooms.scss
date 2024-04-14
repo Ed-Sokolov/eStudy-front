@@ -1,17 +1,19 @@
-.room-list {
-  //display: flex;
-  //flex-wrap: wrap;
-  //justify-content: flex-start;
-  //gap: 32px 16px;
-
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 32px;
-
+.rooms-page {
   padding: 64px 0;
 
-  & > .room {
-    //flex: 1;
-    //min-width: 360px;
+  .room-list {
+    //display: flex;
+    //flex-wrap: wrap;
+    //justify-content: flex-start;
+    //gap: 32px 16px;
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+
+    & > .room {
+      //flex: 1;
+      //min-width: 360px;
+    }
   }
 }

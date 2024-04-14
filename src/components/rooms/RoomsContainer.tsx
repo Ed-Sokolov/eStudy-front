@@ -33,7 +33,11 @@ export const RoomsContainer: React.FC = () => {
 
     return (
         <div className="container">
-            <Rooms rooms={rooms} />
+            <div className="rooms-page">
+                <h1 className="title">Your Rooms</h1>
+
+                <Rooms rooms={rooms} />
+            </div>
         </div>
     )
 }
