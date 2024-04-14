@@ -95,7 +95,8 @@ img {
     height: 2px;
     background: #fff;
     border-radius: 0;
-    left: 0;
+    left: 50%;
+    transform: translateX(-50%);
     top: 110%;
     transition: width .3s, border-radius .3s;
   }
