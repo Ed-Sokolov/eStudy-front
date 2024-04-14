@@ -1,0 +1,40 @@
+.room {
+  flex-shrink: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 4px;
+  position: relative;
+
+  max-width: 375px;
+  width: 100%;
+  height: 175px;
+  padding: 16px 20px;
+  border-radius: 16px;
+  background: #347f6d;
+  color: #fff;
+
+  transition: background .3s;
+
+  &__title {
+    font-size: 28px;
+  }
+
+  &__author {
+    font-size: 14px;
+  }
+
+  &__link {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+  }
+
+  &:hover {
+    background: #256757;
+  }
+}

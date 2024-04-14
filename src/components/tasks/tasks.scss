@@ -1,0 +1,13 @@
+.tasks {
+  padding: 64px 0;
+
+  &__columns {
+    display: flex;
+    justify-content: space-between;
+    gap: 64px;
+
+    &-item {
+      flex-basis: 25%;
+    }
+  }
+}

@@ -1,0 +1,23 @@
+.tasks__column {
+  padding: 16px;
+  border-radius: 16px;
+  background: #347f6d;
+  color: white;
+  width: 100%;
+
+  &-title {
+    text-align: center;
+    margin-bottom: 16px;
+  }
+
+  .tasks__list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+
+    //background: #fff;
+    //border-radius: 8px;
+    //padding: 8px;
+  }
+}

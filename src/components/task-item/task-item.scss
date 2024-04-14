@@ -1,0 +1,40 @@
+.task-item {
+  //background: #347f6d;
+  background: #fff;
+  color: #0d4638;
+  padding: 8px 8px 32px;
+  border-radius: 8px;
+  position: relative;
+  transition: background .3s, color .3s;
+
+  &__info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 4px;
+    font-size: 14px;
+
+    &-date {
+      opacity: .8;
+      font-size: 12px;
+    }
+  }
+
+  &__title {
+    font-size: 20px;
+  }
+
+  &__link {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+  }
+
+  &:hover {
+    //background: #256757;
+    background: #0d4638;
+    color: #fff;
+  }
+}

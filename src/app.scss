@@ -1,0 +1,169 @@
+@import "./common/style/font.css";
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+html, body {
+  margin: 0;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  letter-spacing: .8px;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+img,
+svg {
+  display: flex;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  vertical-align: center;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 1440px;
+  padding: 0 10px;
+}
+
+.menu {
+  display: flex;
+  gap: 16px;
+}
+
+.app-inner {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+
+  & > main {
+    flex-grow: 1;
+  }
+}
+
+.title {
+  width: max-content;
+  text-transform: uppercase;
+  font-size: 48px;
+  text-align: center;
+  margin: 0 auto 32px;
+
+  background-image: linear-gradient(to right, #027764, #449f8a);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.link {
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    background: #fff;
+    border-radius: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 110%;
+    transition: width .3s, border-radius .3s;
+  }
+
+  &:hover {
+    &::before {
+      width: 100%;
+      border-radius: 2px;
+    }
+  }
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.form-group,
+.checkbox-group {
+  label {
+    font-size: 18px;
+  }
+}
+
+.input {
+  padding: 8px;
+  outline: none;
+  font-size: 16px;
+  letter-spacing: .8px;
+  border-left: none;
+  border-top: none;
+  border-right: none;
+  border-bottom: 2px solid black;
+  background: transparent;
+
+  &::placeholder {
+    font-family: "Poppins", sans-serif;
+    font-size: 16px;
+    letter-spacing: .8px;
+  }
+}
+
+.button {
+  width: max-content;
+  padding: 8px 64px;
+  margin: 0 auto;
+  font-size: 18px;
+  letter-spacing: .8px;
+  outline: none;
+  border: none;
+  border-radius: 4px;
+  background: #445d40;
+  color: #fff;
+  cursor: pointer;
+  transition: background .3s;
+
+  &:hover {
+    background: #128d12;
+  }
+}
+
+.divider {
+  width: 64%;
+  margin: 32px auto;
+  height: 2px;
+  background: #0b2107;
+  border-radius: 2px;
+  opacity: .64;
+}
