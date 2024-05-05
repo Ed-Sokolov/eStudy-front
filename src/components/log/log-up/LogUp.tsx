@@ -5,6 +5,7 @@ import { type TLogForm } from "../../../type/log/LogForm";
 import { type TLogUpForm } from "../../../type/log/LogUpForm";
 import LogImg from "./../../../assets/img/log-img-1.jpg";
 import LogBackImg from "../../../assets/img/log-img-2.png";
+import {InputPassword} from "../../inputs/password";
 
 export const LogUp: React.FC<TLogForm<TLogUpForm>> = (
     {
@@ -29,7 +30,8 @@ export const LogUp: React.FC<TLogForm<TLogUpForm>> = (
 
                                     <div className="form-group">
                                         <label htmlFor="password">Password</label>
-                                        <Field type={'password'} as={'input'} name={'password'} id={'password'} placeholder={'Your Password'} className="input"/>
+
+                                        <InputPassword name={'password'} id={'password'} placeholder={'Your Password'} />
                                     </div>
 
                                     <div className="form-group">

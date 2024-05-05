@@ -5,6 +5,8 @@ import { type TLogInForm } from "../../../type/log/LogInForm";
 import {Field, Form, Formik} from "formik";
 import LogImg from "./../../../assets/img/log-img-1.jpg";
 import LogBackImg from "./../../../assets/img/log-img-2.png";
+import {InputPassword} from "../../inputs/password";
+import {InputCheckbox} from "../../inputs/checkbox";
 
 export const LogIn: React.FC<TLogForm<TLogInForm>> = (
     {
@@ -29,12 +31,14 @@ export const LogIn: React.FC<TLogForm<TLogInForm>> = (
 
                                     <div className="form-group">
                                         <label htmlFor="password">Password</label>
-                                        <Field type={'password'} as={'input'} name={'password'} id={'password'} placeholder={'Your Password'} className="input"/>
+
+                                        <InputPassword name={'password'} id={'password'} placeholder={'Your Password'} />
                                     </div>
 
                                     <div className="checkbox-group">
                                         <label htmlFor="checkbox">Remember Me</label>
-                                        <Field type={'checkbox'} name={'remember'} id={'checkbox'}/>
+
+                                        <InputCheckbox id={'checkbox'} name={'remember'}/>
                                     </div>
 
                                     <div className="form-group">
