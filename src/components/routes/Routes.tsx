@@ -3,6 +3,8 @@ import {RoomsContainer} from "../rooms/RoomsContainer";
 import {TasksContainer} from "../tasks/TasksContainer";
 import {LogInContainer} from "../log/log-in/LogInContainer";
 import {LogUpContainer} from "../log/log-up/LogUpContainer";
+import {CreateRoomContainer} from "../create/room/CreateRoomContainer";
+import {CreateTaskContainer} from "../create/task/CreateTaskContainer";
 
 export const Router = () => {
     return (
@@ -13,6 +15,9 @@ export const Router = () => {
 
             <Route path={'/log-in'} element={<LogInContainer />}/>
             <Route path={'/log-up'} element={<LogUpContainer />}/>
+
+            <Route path={'/create/room'} element={<CreateRoomContainer />}/>
+            <Route path={'/create/task'} element={<CreateTaskContainer />}/>
         </Routes>
     )
 }

@@ -24,19 +24,31 @@ export const LogUp: React.FC<TLogForm<TLogUpForm>> = (
                             {
                                 ({errors, touched, isValid}) => <Form className="log-form">
                                     <div className="form-group">
+                                        <label htmlFor="name">Your Name</label>
+
+                                        <Field type={'text'} as={'input'} name={'name'} id={'name'}
+                                               placeholder={'Your Name'} className="input"/>
+
+                                        <span className="hint">Format for name is Full name (Last name, First name, Patronymic) with the initials of the full name. For example, <span>Ivanov A.A.</span> or <span>Avramenko M.F.</span></span>
+                                    </div>
+
+                                    <div className="form-group">
                                         <label htmlFor="email">Email</label>
-                                        <Field type={'email'} as={'input'} name={'email'} id={'email'} placeholder={'Your Email'} className="input"/>
+                                        <Field type={'email'} as={'input'} name={'email'} id={'email'}
+                                               placeholder={'Your Email'} className="input"/>
                                     </div>
 
                                     <div className="form-group">
                                         <label htmlFor="password">Password</label>
 
-                                        <InputPassword name={'password'} id={'password'} placeholder={'Your Password'} />
+                                        <InputPassword name={'password'} id={'password'} placeholder={'Your Password'}/>
                                     </div>
 
                                     <div className="form-group">
                                         <label htmlFor="confirm_password">Repeat Password</label>
-                                        <Field type={'password'} as={'input'} name={'confirm_password'} id={'confirm_password'} placeholder={'Repeat Your Password'} className="input"/>
+                                        <Field type={'password'} as={'input'} name={'confirm_password'}
+                                               id={'confirm_password'} placeholder={'Repeat Your Password'}
+                                               className="input"/>
                                     </div>
 
                                     <div className="form-group">
@@ -53,7 +65,7 @@ export const LogUp: React.FC<TLogForm<TLogUpForm>> = (
                 </div>
 
                 <div className="log__back">
-                    <img src={LogImg} alt=""/>
+                <img src={LogImg} alt=""/>
 
                     <div className="author">
                         Made by <span>Eduard Sokolov</span>

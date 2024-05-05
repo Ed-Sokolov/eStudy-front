@@ -4,6 +4,7 @@ import { type TLogUpForm } from "../../../type/log/LogUpForm";
 
 export const LogUpContainer: React.FC = () => {
     const initValues: TLogUpForm = {
+        name: '',
         email: '',
         password: '',
         confirm_password: '',

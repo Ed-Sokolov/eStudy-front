@@ -108,3 +108,15 @@
     gap: 16px;
   }
 }
+
+.hint {
+  font-size: 14px;
+  padding: 4px 8px;
+  background: #d6fef4;
+  font-style: italic;
+  border-radius: 4px;
+
+  span {
+    font-weight: 500;
+  }
+}
