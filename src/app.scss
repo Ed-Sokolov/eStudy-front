@@ -119,10 +119,27 @@ img {
   display: flex;
   align-items: center;
   gap: 8px;
+  width: fit-content;
 
   svg {
     width: 26px;
     height: 26px;
+  }
+
+  label {
+    order: 1;
+  }
+
+  &:hover {
+    cursor: pointer;
+
+    label {
+      cursor: pointer;
+    }
+  }
+
+  &:hover .input-checkbox .check {
+    stroke-dashoffset: 0;
   }
 }
 
