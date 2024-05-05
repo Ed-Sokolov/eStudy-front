@@ -1,5 +1,4 @@
 import React, {useEffect} from "react";
-import {type TRoom} from "../../type/Room";
 import {Rooms} from "./Rooms";
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import {getRooms} from "../../API/rooms";
@@ -10,7 +9,7 @@ export const RoomsContainer: React.FC = () => {
 
     useEffect(() => {
         dispatch(getRooms())
-    }, [dispatch])
+    }, [])
 
     return (
         <div className="container">
