@@ -1,5 +1,7 @@
+import { type TAuthor } from "./Author";
+
 export type TRoom = {
     id: number
-    title: string
-    author: string
+    name: string
+    author: TAuthor
 }

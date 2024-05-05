@@ -1,42 +1,25 @@
-import React from "react";
-import {type TRoom} from "../../type/Room";
+import React, {useEffect} from "react";
 import {Rooms} from "./Rooms";
+import {useAppDispatch, useAppSelector} from "../../hooks";
+import {getRooms} from "../../API/rooms";
 
 export const RoomsContainer: React.FC = () => {
-    const rooms: TRoom[] = [
-        {
-            id: 1,
-            title: 'Web technology',
-            author: 'Sokolov E.O.',
-        },
-        {
-            id: 2,
-            title: 'Backend-End',
-            author: 'Sokolov E.O.'
-        },
-        {
-            id: 3,
-            title: 'UI/UX',
-            author: 'Sokolov E.O.'
-        },
-        {
-            id: 4,
-            title: 'Front-End',
-            author: 'Sokolov E.O.'
-        },
-        {
-            id: 5,
-            title: 'Computer Networks',
-            author: 'Sokolov E.O.'
-        },
-    ]
+    const {rooms} = useAppSelector(state => state.room);
+    const dispatch = useAppDispatch();
+
+    useEffect(() => {
+        dispatch(getRooms())
+    }, [])
 
     return (
         <div className="container">
             <div className="rooms-page">
                 <h1 className="title">Your Rooms</h1>
 
-                <Rooms rooms={rooms} />
+                {rooms !== null ?
+                    <Rooms rooms={rooms} />
+                    : 'Something Wrong...'
+                }
             </div>
         </div>
     )
