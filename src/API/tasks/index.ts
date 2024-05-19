@@ -1,15 +1,15 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { type TRoom } from "../../type/Room";
 import { instance } from "../instanse";
+import { type TTaskInfo } from "../../type/TaskInfo";
 
-export const getRooms = createAsyncThunk<TRoom[], undefined, { rejectValue: any }>(
-    'rooms',
+export const getInfo = createAsyncThunk<TTaskInfo, undefined, { rejectValue: any }>(
+    'tasks',
     async (_, {rejectWithValue}) => {
         try {
-            const response = await instance.get('/api/rooms/');
+            const response = await instance.get('/api/tasks/info');
 
-            return response.data.data;
+            return response.data;
         } catch (error) {
             if (axios.isAxiosError(error)) {
                 return rejectWithValue(error);
