@@ -1,13 +1,25 @@
 import React from "react";
 import { type TForm } from "../../../type/Form";
 import { type TCreateTask } from "../../../type/create/Task";
-import {Field, Form, Formik} from "formik";
+import { Field, Form, Formik } from "formik";
 import "./../create.scss";
+import Select from 'react-select'
+import { type TSelectOption } from "../../../type/select/Option";
+import {CustomSelect} from "../../inputs/select";
 
-export const CreateTask: React.FC<TForm<TCreateTask>> = (
+export const CreateTask: React.FC<
+    TForm<TCreateTask> & {
+        roomOptions: TSelectOption[]
+        statusOptions: TSelectOption[]
+        taskTypeOptions: TSelectOption[]
+    }
+> = (
     {
         initValues,
-        submit
+        submit,
+        taskTypeOptions,
+        roomOptions,
+        statusOptions
     }
 ) => {
     return (
@@ -28,10 +40,9 @@ export const CreateTask: React.FC<TForm<TCreateTask>> = (
                                     </div>
 
                                     <div className="form-group">
-                                        <label htmlFor="people">Room</label>
+                                        <label htmlFor="room">Room</label>
 
-                                        <Field type={'text'} as={'input'} name={'name'} id={'name'}
-                                               placeholder={'Select Room'} className="input"/>
+                                        <CustomSelect name="room" options={roomOptions}/>
                                     </div>
                                 </div>
 
@@ -39,24 +50,13 @@ export const CreateTask: React.FC<TForm<TCreateTask>> = (
                                     <div className="form-group">
                                         <label htmlFor="status">Status</label>
 
-                                        <Field name="status" as="select" id="status">
-                                            <option disabled selected>Select Task Status</option>
-                                            <option value="priority">Priority</option>
-                                            <option value="in_progress">In Progress</option>
-                                            <option value="check">Check</option>
-                                            <option value="done">Done</option>
-                                        </Field>
+                                        <CustomSelect name="status" options={statusOptions}/>
                                     </div>
 
                                     <div className="form-group">
                                         <label htmlFor="type">Task Type</label>
 
-                                        <Field name="type" as="select" id="type">
-                                            <option disabled selected>Select Task Type</option>
-                                            <option value="lecture">Lecture</option>
-                                            <option value="practice">Practice</option>
-                                            <option value="information">Information</option>
-                                        </Field>
+                                        <CustomSelect name="type" options={taskTypeOptions}/>
                                     </div>
                                 </div>
 

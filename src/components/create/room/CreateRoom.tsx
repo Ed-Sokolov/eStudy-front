@@ -1,13 +1,19 @@
 import React from "react";
 import { type TForm } from "../../../type/Form";
 import { type TCreateRoom } from "../../../type/create/Room";
-import {Field, Form, Formik} from "formik";
+import { Field, Form, Formik } from "formik";
 import "./../create.scss";
+import Select from 'react-select'
+import { type TSelectOption } from "../../../type/select/Option";
+import { CustomSelect } from "../../inputs/select";
 
-export const CreateRoom: React.FC<TForm<TCreateRoom>> = (
+export const CreateRoom: React.FC<
+    TForm<TCreateRoom> & {peopleOptions: TSelectOption[]}
+> = (
     {
         initValues,
-        submit
+        submit,
+        peopleOptions
     }
 ) => {
     return (
@@ -30,8 +36,7 @@ export const CreateRoom: React.FC<TForm<TCreateRoom>> = (
                                     <div className="form-group">
                                         <label htmlFor="people">People</label>
 
-                                        <Field type={'text'} as={'input'} name={'name'} id={'name'}
-                                               placeholder={'Select People'} className="input"/>
+                                        <CustomSelect name="people" options={peopleOptions} isMulti={true} closeMenuOnSelect={false}/>
                                     </div>
                                 </div>
 
