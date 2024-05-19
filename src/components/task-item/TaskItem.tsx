@@ -7,21 +7,21 @@ export const TaskItem: React.FC<TTaskItem> = (
     {
         id,
         author,
-        title,
-        category,
+        type,
+        name,
         date
     }
 ) => {
     return (
         <div className="task-item">
             <div className="task-item__info">
-                <div className="task-item__info-author">{author}</div>
+                <div className="task-item__info-author">{author.name}</div>
                 <div className="task-item__info-date">{date}</div>
             </div>
 
-            <h3 className="task-item__title">{title}</h3>
+            <h3 className="task-item__title">{name}</h3>
 
-            <p className="task-item__category">{category}</p>
+            <p className="task-item__category">{type.name}</p>
 
             <NavLink to={`/rooms/${id}/tasks/${id}`} className={'task-item__link'} />
         </div>

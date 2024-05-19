@@ -9,29 +9,7 @@ export const TasksColumnContainer: React.FC<TTasksColumn> = (
         title
     }
 ) => {
-    const tasks: TTaskItem[] = [
-        {
-            id: 1,
-            title: 'Task 1',
-            author: 'Sokolov E.O.',
-            category: 'Lecture',
-            date: '31.03.2024'
-        },
-        {
-            id: 2,
-            title: 'Task 2',
-            author: 'Sokolov E.O.',
-            category: 'Lecture',
-            date: '31.03.2024'
-        },
-        {
-            id: 3,
-            title: 'Task 3',
-            author: 'Sokolov E.O.',
-            category: 'Lecture',
-            date: '31.03.2024'
-        },
-    ]
+    const tasks: TTaskItem[] = []
 
     return <TasksColumn id={id} title={title} tasks={tasks}/>
 }

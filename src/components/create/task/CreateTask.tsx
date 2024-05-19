@@ -3,7 +3,6 @@ import { type TForm } from "../../../type/Form";
 import { type TCreateTask } from "../../../type/create/Task";
 import { Field, Form, Formik } from "formik";
 import "./../create.scss";
-import Select from 'react-select'
 import { type TSelectOption } from "../../../type/select/Option";
 import {CustomSelect} from "../../inputs/select";
 import {ReactQuillWrapper} from "../../inputs/rich-textarea";
@@ -41,23 +40,23 @@ export const CreateTask: React.FC<
                                     </div>
 
                                     <div className="form-group">
-                                        <label htmlFor="room">Room</label>
+                                        <label htmlFor="room_id">Room</label>
 
-                                        <CustomSelect name="room" options={roomOptions}/>
+                                        <CustomSelect name="room_id" options={roomOptions}/>
                                     </div>
                                 </div>
 
                                 <div className="form-row">
                                     <div className="form-group">
-                                        <label htmlFor="status">Status</label>
+                                        <label htmlFor="status_id">Status</label>
 
-                                        <CustomSelect name="status" options={statusOptions}/>
+                                        <CustomSelect name="status_id" options={statusOptions}/>
                                     </div>
 
                                     <div className="form-group">
-                                        <label htmlFor="type">Task Type</label>
+                                        <label htmlFor="type_id">Task Type</label>
 
-                                        <CustomSelect name="type" options={taskTypeOptions}/>
+                                        <CustomSelect name="type_id" options={taskTypeOptions}/>
                                     </div>
                                 </div>
 
@@ -65,9 +64,6 @@ export const CreateTask: React.FC<
                                     <label htmlFor="description">Description</label>
 
                                     <ReactQuillWrapper name="description" id="description" placeholder="Description about this task" />
-
-                                    {/*<Field name="description" as="textarea" id="description"*/}
-                                    {/*       className="textarea"></Field>*/}
                                 </div>
 
                                 <div className="form-group">

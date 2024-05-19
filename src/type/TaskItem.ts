@@ -1,7 +1,16 @@
+import { type TAuthor } from "./Author";
+
+type TInfo = {
+    id: number
+    name: string
+}
+
 export type TTaskItem = {
     id: number
-    title: string
-    author: string
-    category: string
+    name: string
     date: string
+    author: TAuthor
+    room: TInfo
+    type: TInfo
+    status: TInfo
 }
