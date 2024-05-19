@@ -6,6 +6,7 @@ import "./../create.scss";
 import Select from 'react-select'
 import { type TSelectOption } from "../../../type/select/Option";
 import {CustomSelect} from "../../inputs/select";
+import {ReactQuillWrapper} from "../../inputs/rich-textarea";
 
 export const CreateTask: React.FC<
     TForm<TCreateTask> & {
@@ -63,8 +64,10 @@ export const CreateTask: React.FC<
                                 <div className="form-group">
                                     <label htmlFor="description">Description</label>
 
-                                    <Field name="description" as="textarea" id="description"
-                                           className="textarea"></Field>
+                                    <ReactQuillWrapper name="description" id="description" placeholder="Description about this task" />
+
+                                    {/*<Field name="description" as="textarea" id="description"*/}
+                                    {/*       className="textarea"></Field>*/}
                                 </div>
 
                                 <div className="form-group">
