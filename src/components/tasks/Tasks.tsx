@@ -1,13 +1,18 @@
 import React from "react";
 import "./tasks.scss";
-import {TasksColumnContainer} from "../tasks-column/TasksColumnContainer";
-import {TTasksColumn} from "../../type/TasksColumn";
+import { TasksColumnContainer } from "../tasks-column/TasksColumnContainer";
+import { type TTasksColumn } from "../../type/TasksColumn";
+import { type TTaskItem } from "../../type/TaskItem";
 
 export const Tasks: React.FC<
-    {columns: TTasksColumn[]}
+    {
+        columns: TTasksColumn[]
+        tasks: TTaskItem[]
+    }
 > = (
     {
-        columns
+        columns,
+        tasks
     }
 ) => {
     return (
@@ -17,7 +22,7 @@ export const Tasks: React.FC<
 
                 <ul className="tasks__columns">
                     {columns.map((column: TTasksColumn) => <li className="tasks__columns-item" key={column.id}>
-                        <TasksColumnContainer {...column} />
+                        <TasksColumnContainer {...column} tasks={tasks} />
                     </li>)}
                 </ul>
             </div>

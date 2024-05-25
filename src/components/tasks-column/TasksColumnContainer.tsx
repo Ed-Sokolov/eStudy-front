@@ -1,15 +1,21 @@
-import React from "react";
-import {TasksColumn} from "./TasksColumn";
-import {type TTasksColumn} from "../../type/TasksColumn";
-import {type TTaskItem} from "../../type/TaskItem";
+import React, { useEffect } from "react";
+import { TasksColumn } from "./TasksColumn";
+import { useAppDispatch, useAppSelector } from "../../hooks";
+import { getRoomTasks } from "../../API/rooms";
+import { useParams } from "react-router-dom";
+import { type TTasksColumn } from "../../type/TasksColumn";
+import { type TTaskItem } from "../../type/TaskItem";
 
-export const TasksColumnContainer: React.FC<TTasksColumn> = (
+export const TasksColumnContainer: React.FC<
+    TTasksColumn & {
+        tasks: TTaskItem[]
+    }
+> = (
     {
         id,
-        title
+        title,
+        tasks
     }
 ) => {
-    const tasks: TTaskItem[] = []
-
-    return <TasksColumn id={id} title={title} tasks={tasks}/>
+    return <TasksColumn id={id} title={title} tasks={tasks.filter((task: TTaskItem) => task.status.id === id)}/>
 }

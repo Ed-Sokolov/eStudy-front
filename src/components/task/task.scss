@@ -1,0 +1,81 @@
+.task {
+  padding: 32px;
+  background: #fff;
+  box-shadow: 0 4px 50px rgba(0, 0, 0, .12);
+  border-radius: 0 0 16px 16px;
+
+  &__header {
+    position: relative;
+
+    &-info {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-bottom: 32px;
+    }
+
+    &-date {
+      font-size: 14px;
+      color: #989898;
+    }
+  }
+
+  &__title {
+    &-wrapper {
+      position: relative;
+      margin-bottom: 32px;
+    }
+
+    &-subtitle {
+      position: absolute;
+      font-size: 24px;
+      font-weight: 600;
+      color: #d6d6d6;
+      right: 0;
+      top: 0;
+    }
+  }
+
+  &__room {
+    &-name {
+      position: absolute;
+      font-size: 36px;
+      font-weight: 800;
+      right: 0;
+      color: #d6d6d6;
+    }
+  }
+
+  &-nav {
+    margin-bottom: 32px;
+
+    &__list {
+      display: flex;
+      justify-content: center;
+
+      &-item {
+        &:first-child {
+          .tab-item {
+            &:before {
+              right: 0;
+              left: auto;
+              transform: unset;
+              border-radius: 2px 0 0 2px;
+            }
+          }
+        }
+
+        &:last-child {
+          .tab-item {
+            &:before {
+              left: 0;
+              right: auto;
+              transform: unset;
+              border-radius: 0 2px 2px 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}

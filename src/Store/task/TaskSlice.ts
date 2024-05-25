@@ -1,9 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createTask, getInfo } from "../../API/tasks";
+import { getRoomTasks } from "../../API/rooms";
 import { type TTaskInfo } from "../../type/TaskInfo";
+import { type TTaskItem } from "../../type/TaskItem";
 
 const initState = {
     info: null as TTaskInfo | null,
+    tasks: null as TTaskItem[] | null,
     isLoading: false as boolean
 }
 
@@ -32,6 +35,18 @@ const taskSlice = createSlice({
                 state.isLoading = false;
             })
             .addCase(createTask.rejected, (state, action) => {
+                state.isLoading = false;
+
+                throw action.payload;
+            })
+            .addCase(getRoomTasks.pending, state => {
+                state.isLoading = true;
+            })
+            .addCase(getRoomTasks.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.tasks = action.payload;
+            })
+            .addCase(getRoomTasks.rejected, (state, action) => {
                 state.isLoading = false;
 
                 throw action.payload;

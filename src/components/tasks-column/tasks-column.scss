@@ -1,5 +1,5 @@
 .tasks__column {
-  padding: 16px;
+  padding: 16px 8px 8px;
   border-radius: 16px;
   background: #347f6d;
   color: white;
@@ -13,7 +13,7 @@
   .tasks__list {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
     width: 100%;
     border-radius: 8px;
     overflow: hidden;

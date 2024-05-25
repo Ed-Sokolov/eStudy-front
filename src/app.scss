@@ -205,3 +205,51 @@ img {
   border-radius: 2px;
   opacity: .64;
 }
+
+.tab {
+  &-item {
+    position: relative;
+    min-width: 220px;
+    padding: 8px 16px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 500;
+
+    &:before {
+      position: absolute;
+      content: '';
+      width: 0%;
+      height: 4px;
+      left: 50%;
+      right: 50%;
+      top: 100%;
+      transform: translate(-50%, -50%);
+      background: #6c9e6c;
+      border-radius: 2px;
+
+      transition: width .3s, background .3s;
+    }
+
+    &:hover {
+      &:before {
+        width: 100%;
+      }
+    }
+
+    &.active {
+      &:before {
+        width: 100%;
+        background: #0b780b;
+      }
+    }
+
+    &__content {
+      display: none;
+
+      &.active {
+        display: initial;
+      }
+    }
+  }
+}
