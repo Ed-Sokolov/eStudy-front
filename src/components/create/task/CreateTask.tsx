@@ -4,8 +4,9 @@ import { type TCreateTask } from "../../../type/create/Task";
 import { Field, Form, Formik } from "formik";
 import "./../create.scss";
 import { type TSelectOption } from "../../../type/select/Option";
-import {CustomSelect} from "../../inputs/select";
-import {ReactQuillWrapper} from "../../inputs/rich-textarea";
+import { CustomSelect } from "../../inputs/select";
+import { ReactQuillWrapper } from "../../inputs/rich-textarea";
+import { Dropzone } from "../../dropzone/Dropzone";
 
 export const CreateTask: React.FC<
     TForm<TCreateTask> & {
@@ -69,8 +70,10 @@ export const CreateTask: React.FC<
                                 <div className="form-group">
                                     <label htmlFor="attachments">Attachments</label>
 
-                                    <Field type={'file'} name="attachments" as="input" id="attachments"
-                                           className="input"></Field>
+                                    {/*<Field type={'file'} name="attachments" as="input" id="attachments"*/}
+                                    {/*       className="input"></Field>*/}
+
+                                    <Dropzone name={"attachments"} />
                                 </div>
 
                                 <div className="form-group">

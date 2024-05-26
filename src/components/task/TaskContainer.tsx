@@ -1,8 +1,37 @@
-import React, {useState} from "react";
+import React, { useEffect, useState } from "react";
 import { Task } from "./Task";
+import { useAppDispatch, useAppSelector } from "../../hooks";
+import { useParams } from "react-router-dom";
+import { getTask } from "../../API/tasks";
 
 export const TaskContainer: React.FC = () => {
     const [currentTab, setCurrentTab] = useState<'content' | 'attachments'>('content')
 
-    return <Task currentTab={currentTab} setCurrentTab={setCurrentTab}/>
+    const { task } = useAppSelector(state => state.task)
+    const dispatch = useAppDispatch();
+
+    const { roomID, taskID} = useParams()
+
+    const isCorrectID = (id: string | undefined): boolean => {
+        return !!(id && !isNaN(Number(id)))
+    }
+
+    useEffect(() => {
+        if (isCorrectID(roomID) && isCorrectID(taskID))
+        {
+            dispatch(getTask({
+                taskID: Number(taskID),
+                roomID: Number(roomID)
+            }))
+        }
+    }, []);
+
+    return (
+        <>
+            {task
+                ? <Task task={task} currentTab={currentTab} setCurrentTab={setCurrentTab}/>
+                : <div>Loading...</div>
+            }
+        </>
+    )
 }

@@ -5,4 +5,5 @@ export type TCreateTask = {
     room_id: number
     status_id: number
     type_id: number
+    attachments: File[]
 }

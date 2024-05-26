@@ -9,7 +9,8 @@ export const TaskItem: React.FC<TTaskItem> = (
         author,
         type,
         name,
-        date
+        date,
+        room
     }
 ) => {
     return (
@@ -23,7 +24,7 @@ export const TaskItem: React.FC<TTaskItem> = (
 
             <p className="task-item__category">{type.name}</p>
 
-            <NavLink to={`/rooms/${id}/tasks/${id}`} className={'task-item__link'} />
+            <NavLink to={`/rooms/${room.id}/tasks/${id}`} className={'task-item__link'} />
         </div>
     )
 }

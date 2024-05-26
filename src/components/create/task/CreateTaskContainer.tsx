@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { CreateTask } from "./CreateTask";
 import { type TCreateTask } from "../../../type/create/Task";
 import { useAppDispatch, useAppSelector } from "../../../hooks";
-import {createTask, getInfo} from "../../../API/tasks";
+import { createTask, getInfo } from "../../../API/tasks";
 
 export const CreateTaskContainer: React.FC = () => {
     const {info} = useAppSelector(state => state.task);
@@ -18,11 +18,13 @@ export const CreateTaskContainer: React.FC = () => {
         room_id: 0,
         author_id: 1,
         type_id: 0,
-        status_id: 0
+        status_id: 0,
+        attachments: []
     }
 
     const submit = (values: TCreateTask) => {
-        dispatch(createTask(values))
+        console.log(values);
+        // dispatch(createTask(values))
     }
 
     return (

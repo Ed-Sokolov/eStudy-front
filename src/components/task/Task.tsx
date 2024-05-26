@@ -1,29 +1,35 @@
 import React from "react";
 import "./task.scss";
+import { type TTask as TTaskContent } from "../../type/Task";
+import parse from "html-react-parser";
 
-export const Task: React.FC<{
+type TTask = {
     currentTab: 'content' | 'attachments'
     setCurrentTab: (value: 'content' | 'attachments') => void
-}> = ({
+    task: TTaskContent
+}
+
+export const Task: React.FC<TTask> = ({
     currentTab,
-    setCurrentTab
+    setCurrentTab,
+    task
 }) => {
     return (
         <div className="container">
             <div className="task">
                 <div className="task__header">
-                    <div className="task__room-name">Computer Architecture</div>
+                    <div className="task__room-name">{task.room.name}</div>
 
                     <div className="task__header-info">
-                        <div className="task__header-author">Sokolov E.O.</div>
+                        <div className="task__header-author">{task.author.name}</div>
 
-                        <div className="task__header-date">/-- 25.05.2024 --/</div>
+                        <div className="task__header-date">/-- {task.date} --/</div>
                     </div>
 
                     <div className="task__title-wrapper">
-                        <h1 className="task__title">Lecture №12</h1>
+                        <h1 className="task__title">{task.name}</h1>
 
-                        <p className="task__title-subtitle">Lecture</p>
+                        <p className="task__title-subtitle">{task.type.name}</p>
                     </div>
                 </div>
 
@@ -39,29 +45,11 @@ export const Task: React.FC<{
                         </ul>
                     </nav>
 
-                    <div className="task__content">
+                    <div className="task__content-wrapper">
                         <div className={`tab-item__content ${currentTab === 'content' && 'active'}`} data-tab-element="content">
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur corporis cumque
-                                dignissimos doloribus ducimus exercitationem impedit iusto mollitia nesciunt numquam omnis,
-                                quia ratione rerum veritatis voluptates! Animi aperiam asperiores debitis deleniti, deserunt
-                                dignissimos distinctio doloremque eligendi exercitationem facere fuga in laudantium libero
-                                maxime, officia quae quo, quod vel veniam voluptatum!
-                            </p>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur corporis cumque
-                                dignissimos doloribus ducimus exercitationem impedit iusto mollitia nesciunt numquam omnis,
-                                quia ratione rerum veritatis voluptates! Animi aperiam asperiores debitis deleniti, deserunt
-                                dignissimos distinctio doloremque eligendi exercitationem facere fuga in laudantium libero
-                                maxime, officia quae quo, quod vel veniam voluptatum!
-                            </p>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur corporis cumque
-                                dignissimos doloribus ducimus exercitationem impedit iusto mollitia nesciunt numquam omnis,
-                                quia ratione rerum veritatis voluptates! Animi aperiam asperiores debitis deleniti, deserunt
-                                dignissimos distinctio doloremque eligendi exercitationem facere fuga in laudantium libero
-                                maxime, officia quae quo, quod vel veniam voluptatum!
-                            </p>
+                            <div className="task__content">
+                                {parse(task.content)}
+                            </div>
                         </div>
 
                         <div className={`tab-item__content ${currentTab === 'attachments' && 'active'}`} data-tab-element="attachments">
