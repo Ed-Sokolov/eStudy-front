@@ -23,8 +23,7 @@ export const CreateTaskContainer: React.FC = () => {
     }
 
     const submit = (values: TCreateTask) => {
-        console.log(values);
-        // dispatch(createTask(values))
+        dispatch(createTask(values))
     }
 
     return (

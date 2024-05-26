@@ -32,6 +32,13 @@ export const createTask = createAsyncThunk<number, TCreateTask, { rejectValue: a
             formData.append('status_id', data.status_id.toString());
             formData.append('type_id', data.type_id.toString());
 
+            if (data.attachments.length > 0)
+            {
+                data.attachments.forEach((attachment: File) => {
+                    formData.append('attachments[]', attachment);
+                })
+            }
+
             if (data.description.trim().length > 0)
             {
                 formData.append('description', data.description);

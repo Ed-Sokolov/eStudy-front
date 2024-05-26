@@ -4,4 +4,99 @@
   border-radius: 4px;
   text-align: center;
   cursor: pointer;
+
+  &__content {
+    .accepted {
+      &__list {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(100px, 252px));
+        gap: 16px 8px;
+        padding: 16px 0;
+      }
+
+      &-item {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 8px;
+
+        &__name {
+          text-overflow: ellipsis;
+          overflow: hidden;
+          width: 100%;
+          white-space: nowrap;
+        }
+
+        &__img {
+          &-wrapper {
+            img,
+            svg {
+              height: 64px;
+              object-fit: contain;
+            }
+          }
+        }
+      }
+    }
+
+    .remove {
+      &__icon {
+        height: 16px;
+        width: 16px;
+
+        path {
+          fill: #ff7373;
+
+          transition: fill .3s;
+        }
+
+        &-wrapper {
+          position: absolute;
+          top: 0;
+          right: 0;
+          padding: 4px;
+          border-radius: 50%;
+          border: 2px solid #ff3232;
+          cursor: pointer;
+          background: transparent;
+
+          transition: border-color .3s, background .3s;
+
+          &:hover {
+            border-color: #b50000;
+            background: #ff2c2c;
+
+            svg {
+              path {
+                fill: #fff;
+              }
+            }
+          }
+        }
+      }
+
+      &__bnt {
+        padding: 8px 16px;
+        background: #ff9393;
+        border: 2px solid #ff7373;
+        border-radius: 4px;
+        width: max-content;
+        cursor: pointer;
+
+        transition: color .3s, background .3s, border-color .3s;
+
+        &:hover {
+          background: #fd4343;
+          border-color: #cc0000;
+          color: #ffffff;
+        }
+
+        &.remove__bnt-all {
+          margin: 16px auto;
+        }
+      }
+    }
+  }
 }

@@ -1,14 +1,49 @@
-import React, {useCallback, useEffect, useState} from "react";
-import { FileRejection, useDropzone } from "react-dropzone";
+import React, {ReactElement, useCallback, useEffect, useState} from "react";
+import { useDropzone } from "react-dropzone";
 import "./dropzone.scss";
-import {FormikErrors, useField, useFormikContext} from "formik";
+import { useFormikContext } from "formik";
+import { AcceptedFiles } from "./files/Accepted";
+import { ReactComponent as DocIcon } from "../../assets/img/files/doc.svg";
+import { ReactComponent as PDFIcon } from "../../assets/img/files/pdf.svg";
+import { ReactComponent as ArchiveIcon } from "../../assets/img/files/archive.svg";
+import { ReactComponent as TextIcon } from "../../assets/img/files/text.svg";
+import { ReactComponent as ExcelIcon } from "../../assets/img/files/excel.svg";
+import { ReactComponent as PointIcon } from "../../assets/img/files/point.svg";
 
-interface DropzoneFile extends File {
-    preview: string
+export interface DropzoneFile extends File {
+    preview: string | ReactElement
 }
 
 type TDropzone = {
     name: string
+}
+
+const fileFormats: string[] = [
+    'application/msword',
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    'application/pdf',
+    'application/zip',
+    'application/x-rar-compressed',
+    'text/plain',
+    'application/vnd.ms-excel',
+    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    'application/vnd.ms-powerpoint',
+    'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+];
+
+type FileFormat = (typeof fileFormats)[number];
+
+const fileIcons: {[k in FileFormat]: ReactElement} = {
+    'application/msword': <DocIcon />,
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document': <DocIcon />,
+    'application/pdf': <PDFIcon />,
+    'application/zip': <ArchiveIcon />,
+    'application/x-rar-compressed': <ArchiveIcon />,
+    'text/plain': <TextIcon />,
+    'application/vnd.ms-excel': <ExcelIcon />,
+    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': <ExcelIcon />,
+    'application/vnd.ms-powerpoint': <PointIcon />,
+    'application/vnd.openxmlformats-officedocument.presentationml.presentation': <PointIcon />,
 }
 
 export const Dropzone: React.FC<TDropzone> = (
@@ -17,29 +52,30 @@ export const Dropzone: React.FC<TDropzone> = (
     }
 ) => {
     const [files, setFiles] = useState<DropzoneFile[]>([])
-    const [rejectedFiles, setRejectedFiles] = useState<FileRejection[]>([])
 
     const { setFieldValue } = useFormikContext();
-    const [field, meta] = useField(name);
 
     useEffect( () => {
         setFieldValue(name, files);
     }, [files, setFieldValue, name]);
 
-    const onDrop = useCallback((acceptedFiles: File[], fileRejections: FileRejection[]) => {
+    const onDrop = useCallback((acceptedFiles: File[]) => {
         if (acceptedFiles.length)
         {
             setFiles(prevFiles => [
                 ...prevFiles,
                 ...acceptedFiles.map(file => {
-                    return Object.assign(file, { preview: URL.createObjectURL(file) })
+                    let isFileFormat: boolean = false
+
+
+                    if (fileFormats.includes(file.type))
+                    {
+                        isFileFormat = true
+                    }
+
+                    return Object.assign(file, { preview: isFileFormat ? fileIcons[file.type] : URL.createObjectURL(file) })
                 })
             ])
-        }
-
-        if (fileRejections.length)
-        {
-            setRejectedFiles(prevFiles => [...prevFiles, ...fileRejections])
         }
     }, [])
 
@@ -55,22 +91,22 @@ export const Dropzone: React.FC<TDropzone> = (
             'application/vnd.openxmlformats-officedocument.wordprocessingml.document': ['.docx'],
             'application/pdf': ['.pdf'],
             'application/zip': ['.zip'],
-            'application/x-rar-compressed': ['.rar']
+            'application/x-rar-compressed': ['.rar'],
+            'text/plain': ['.txt'],
+            'application/vnd.ms-excel': ['.xls'],
+            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': ['.xlsx'],
+            'application/vnd.ms-powerpoint': ['.ppt'],
+            'application/vnd.openxmlformats-officedocument.presentationml.presentation': ['.pptx']
         },
-        maxSize: 20971520 // 20MB
+        maxSize: 10485760 // 10MB
     })
 
     const removeFile = (lastModified: number): void => {
         setFiles(files.filter(file => file.lastModified !== lastModified))
     }
 
-    const removeRejectedFile = (lastModified: number): void => {
-        setRejectedFiles(rejectedFiles.filter(({file}) => file.lastModified !== lastModified))
-    }
-
     const removeAllAttachments = (): void => {
         setFiles([])
-        setRejectedFiles([])
     }
 
     return (
@@ -85,37 +121,15 @@ export const Dropzone: React.FC<TDropzone> = (
             </div>
 
             {files.length > 0
-                ? <div onClick={removeAllAttachments}>
+                && <div className="remove__bnt remove__bnt-all" onClick={removeAllAttachments}>
                     Remove All Attachments
                 </div>
-                : <></>
             }
 
-            <ul>
-                {files.map(file => <li key={file.lastModified}>
-                    <img src={file.preview} alt="" width={100} height={100}/>
-                    {file.name}
-                    <div onClick={() => removeFile(file.lastModified)}>
-                        remove
-                    </div>
-                </li>)}
-            </ul>
-
-            <ul>
-                {rejectedFiles.map(({file, errors}) => <li key={file.lastModified}>
-                    {file.name}
-
-                    <div>
-                        {errors.map((error, index) => <div key={index}>
-                            {error.message}
-                        </div>)}
-                    </div>
-
-                    <div onClick={() => removeRejectedFile(file.lastModified)}>
-                        remove
-                    </div>
-                </li>)}
-            </ul>
+            {
+                files.length > 0
+                    && <AcceptedFiles files={files} removeFile={removeFile} />
+            }
         </div>
     )
 }
