@@ -2,6 +2,7 @@ import React from "react";
 import "./task.scss";
 import { type TTask as TTaskContent } from "../../type/Task";
 import parse from "html-react-parser";
+import { AttachmentList } from "./content/AttachmentList";
 
 type TTask = {
     currentTab: 'content' | 'attachments'
@@ -37,10 +38,20 @@ export const Task: React.FC<TTask> = ({
                     <nav className="task-nav">
                         <ul className="task-nav__list">
                             <li className="task-nav__list-item">
-                                <div className={`tab-item ${currentTab === 'content' && 'active'}`} data-tab-id="content" onClick={() => setCurrentTab('content')}>Content</div>
+                                <div className={`tab-item ${currentTab === 'content' && 'active'}`} data-tab-id="content" onClick={() => setCurrentTab('content')}>
+                                    Content
+                                </div>
                             </li>
                             <li className="task-nav__list-item">
-                                <div className={`tab-item ${currentTab === 'attachments' && 'active'}`} data-tab-id="attachments" onClick={() => setCurrentTab('attachments')}>Attachments</div>
+                                <div className={`tab-item ${currentTab === 'attachments' && 'active'}`} data-tab-id="attachments" onClick={() => setCurrentTab('attachments')}>
+                                    Attachments
+
+                                    <div className="tab-item__count">
+                                        <div className="tab-item__count-inner">
+                                            {task.attachments.length}
+                                        </div>
+                                    </div>
+                                </div>
                             </li>
                         </ul>
                     </nav>
@@ -53,7 +64,11 @@ export const Task: React.FC<TTask> = ({
                         </div>
 
                         <div className={`tab-item__content ${currentTab === 'attachments' && 'active'}`} data-tab-element="attachments">
-                            Soon...
+                            {
+                                task.attachments.length > 0
+                                    ? <AttachmentList attachments={task.attachments} />
+                                    : <div>Empty</div>
+                            }
                         </div>
                     </div>
                 </div>

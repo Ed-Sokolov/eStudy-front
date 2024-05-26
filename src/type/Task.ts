@@ -1,12 +1,6 @@
 import { type TAuthor } from "./Author";
 import { type TInfo } from "./Info";
-
-type TAttachment = {
-    id: number
-    original_name: string
-    url: string
-    type: 'image' | 'doc' | 'pdf' | 'archive' | 'text' | 'excel' | 'point'
-}
+import { type TAttachment } from "./Attachment";
 
 export type TTask = {
     id: number
