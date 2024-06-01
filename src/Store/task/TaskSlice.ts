@@ -15,7 +15,23 @@ const initState = {
 const taskSlice = createSlice({
     name: 'tasks',
     initialState: initState,
-    reducers: {},
+    reducers: {
+        updateLocalTaskStatus(state, action) {
+            const { taskID, newStatusID } = action.payload;
+
+            if (state.tasks && taskID && newStatusID)
+            {
+                state.tasks = state.tasks.map((task: TTaskItem) => {
+                    if (task.id === taskID)
+                    {
+                        task.status.id = newStatusID
+                    }
+
+                    return task
+                })
+            }
+        }
+    },
     extraReducers: builder => {
         builder
             .addCase(getInfo.pending, state => {
@@ -67,5 +83,7 @@ const taskSlice = createSlice({
             })
     }
 })
+
+export const { updateLocalTaskStatus } = taskSlice.actions;
 
 export default taskSlice.reducer;

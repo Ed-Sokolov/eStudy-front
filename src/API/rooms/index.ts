@@ -3,7 +3,6 @@ import axios, {AxiosResponse} from "axios";
 import { type TRoom } from "../../type/Room";
 import { instance } from "../instanse";
 import { type TTaskItem } from "../../type/TaskItem";
-import { type TTask } from "../../type/Task";
 
 export const getRooms = createAsyncThunk<TRoom[], undefined, { rejectValue: any }>(
     'rooms',

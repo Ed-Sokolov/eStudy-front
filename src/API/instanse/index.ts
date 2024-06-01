@@ -4,5 +4,6 @@ const url: string = process.env.REACT_APP_BACK_URL ? process.env.REACT_APP_BACK_
 
 export const instance: AxiosInstance = axios.create({
     withCredentials: true,
+    withXSRFToken: true,
     baseURL: url
 })

@@ -1,10 +1,22 @@
 import React from "react";
 import "./header.scss";
-import {ReactComponent as Logo} from "../../assets/img/logo.svg";
-import {ReactComponent as Divider} from "../../assets/img/divider.svg";
-import {NavLink} from "react-router-dom";
+import { ReactComponent as Logo } from "../../assets/img/logo.svg";
+import { NavLink} from "react-router-dom";
+import { type TUser } from "../../type/User";
+import { HeaderUser } from "./User";
+import { HeaderLog } from "./Log";
 
-export const Header: React.FC = () => {
+type THeader = {
+    isAuth: boolean
+    user: TUser | null
+}
+
+export const Header: React.FC<THeader> = (
+    {
+        user,
+        isAuth
+    }
+) => {
     return (
         <header className="header">
             <div className="container">
@@ -28,23 +40,11 @@ export const Header: React.FC = () => {
                         </ul>
                     </nav>
 
-                    <ul className="header__log">
-                        <li className="header__log-item">
-                            <NavLink to={'/log-in'} className={'link'}>Log In</NavLink>
-                        </li>
-                        <li className="header__log-item">
-                            <div className="vertical-divider">
-                                <Divider />
-                            </div>
-                        </li>
-                        <li className="header__log-item">
-                            <NavLink to={'/log-up'} className={'link'}>Log Up</NavLink>
-                        </li>
-                    </ul>
-
-                    {/*<div className="header__user">*/}
-                    {/*    Sokolov E. O.*/}
-                    {/*</div>*/}
+                    {
+                        isAuth && user
+                            ? <HeaderUser user={user} />
+                            : <HeaderLog />
+                    }
 
                     <div className="header__new-wrapper">
                         <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">

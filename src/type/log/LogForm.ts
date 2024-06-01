@@ -1,4 +1,6 @@
+import {FormikHelpers} from "formik";
+
 export type TLogForm<TForm> = {
     initValues: TForm
-    submit: (values: TForm) => void
+    submit: (values: TForm, actions: FormikHelpers<TForm>) => void
 }
