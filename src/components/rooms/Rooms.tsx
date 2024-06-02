@@ -1,20 +1,24 @@
 import React from "react";
 import "./rooms.scss";
-import {type TRoom} from "../../type/Room";
-import {Room} from "../room/Room";
+import { Room } from "../room/Room";
+import { type TRoom } from "../../type/Room";
+import { type TUser } from "../../type/User";
 
 type TRooms = {
     rooms: TRoom[]
 }
 
-export const Rooms: React.FC<TRooms> = (
+export const Rooms: React.FC<TRooms & {
+    user: TUser | null
+}> = (
     {
-        rooms
+        rooms,
+        user
     }
 ) => {
     return (
         <div className="room-list">
-            {rooms.map((room: TRoom) => <Room key={room.id} {...room}/>)}
+            {rooms.map((room: TRoom) => <Room user={user} key={room.id} {...room}/>)}
         </div>
     )
 }

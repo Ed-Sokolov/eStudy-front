@@ -1,24 +1,24 @@
 import React from "react";
-import { type TForm } from "../../../type/Form";
-import { type TCreateRoom } from "../../../type/create/Room";
 import { Field, Form, Formik } from "formik";
-import "./../create.scss";
-import { type TSelectOption } from "../../../type/select/Option";
+import "./../../create/create.scss";
 import { CustomSelect } from "../../inputs/select";
+import { type TSelectOption } from "../../../type/select/Option";
+import { type TForm } from "../../../type/Form";
+import { type TEditRoom } from "../../../type/edit/Room";
 
-export const CreateRoom: React.FC<
-    TForm<TCreateRoom> & {peopleOptions: TSelectOption[]}
-> = (
+export const EditRoom: React.FC<TForm<TEditRoom> & {
+    peopleOptions: TSelectOption[]
+}> = (
     {
         initValues,
         submit,
-        peopleOptions
+        peopleOptions,
     }
 ) => {
     return (
         <div className="container">
             <div className="creating-page">
-                <h1 className="title">Create a new room</h1>
+                <h1 className="title">Edit this room</h1>
 
                 <div className="form-wrapper">
                     <Formik initialValues={initValues} onSubmit={submit}>
@@ -35,7 +35,7 @@ export const CreateRoom: React.FC<
                                     <div className="form-group">
                                         <label htmlFor="students">People</label>
 
-                                        <CustomSelect name="students" options={peopleOptions} isMulti={true} closeMenuOnSelect={false}/>
+                                        <CustomSelect name="students" options={peopleOptions} defaultValues={initValues.students} isMulti={true} closeMenuOnSelect={false}/>
                                     </div>
                                 </div>
 

@@ -4,8 +4,14 @@ import { useAppDispatch, useAppSelector } from "../../hooks";
 import { getRooms } from "../../API/rooms";
 
 export const RoomsContainer: React.FC = () => {
-    const {rooms} = useAppSelector(state => state.room);
-    const dispatch = useAppDispatch();
+    const
+        {
+            rooms
+        } = useAppSelector(state => state.room),
+        {
+            user
+        } = useAppSelector(state => state.auth),
+        dispatch = useAppDispatch();
 
     useEffect(() => {
         dispatch(getRooms())
@@ -17,7 +23,7 @@ export const RoomsContainer: React.FC = () => {
                 <h1 className="title">Your Rooms</h1>
 
                 {rooms !== null ?
-                    <Rooms rooms={rooms} />
+                    <Rooms rooms={rooms} user={user} />
                     : 'Something Wrong...'
                 }
             </div>

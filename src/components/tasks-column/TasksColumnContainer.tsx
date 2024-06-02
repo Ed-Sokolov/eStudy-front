@@ -1,8 +1,6 @@
-import React, {useEffect, useState} from "react";
+import React, { useState } from "react";
 import { TasksColumn } from "./TasksColumn";
-import { useAppDispatch, useAppSelector } from "../../hooks";
-import { getRoomTasks } from "../../API/rooms";
-import { useParams } from "react-router-dom";
+import { useAppSelector } from "../../hooks";
 import { type TTasksColumn } from "../../type/TasksColumn";
 import { type TTaskItem } from "../../type/TaskItem";
 
@@ -17,6 +15,8 @@ export const TasksColumnContainer: React.FC<
         tasks
     }
 ) => {
+    const { user } = useAppSelector(state => state.auth)
+
     const [taskID, setTaskID] = useState<number | null>(null)
 
     const dragStartHandler = (e: React.DragEvent<HTMLDivElement>, taskID: number): void => {
@@ -27,5 +27,5 @@ export const TasksColumnContainer: React.FC<
         console.log('taskID', taskID);
     }
 
-    return <TasksColumn taskID={taskID} setTaskID={setTaskID} dragStartHandler={dragStartHandler} id={id} title={title} tasks={tasks.filter((task: TTaskItem) => task.status.id === id)}/>
+    return <TasksColumn user={user} taskID={taskID} setTaskID={setTaskID} dragStartHandler={dragStartHandler} id={id} title={title} tasks={tasks.filter((task: TTaskItem) => task.status.id === id)}/>
 }

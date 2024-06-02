@@ -4,11 +4,12 @@ import Select, { ActionMeta, MultiValue, SingleValue } from 'react-select';
 import { type TSelectOption } from "../../type/select/Option";
 
 export const CustomSelect: React.FC<{
-    name: string;
-    options: TSelectOption[];
-    isMulti?: boolean;
-    closeMenuOnSelect?: boolean;
-}> = ({ name, options, isMulti = false, closeMenuOnSelect = true }) => {
+    name: string
+    options: TSelectOption[]
+    isMulti?: boolean
+    closeMenuOnSelect?: boolean
+    defaultValues?: TSelectOption[]
+}> = ({ name, options, isMulti = false, closeMenuOnSelect = true, defaultValues = [] }) => {
     const { setFieldValue } = useFormikContext();
     const [field] = useField(name);
 
@@ -44,6 +45,7 @@ export const CustomSelect: React.FC<{
             closeMenuOnSelect={closeMenuOnSelect}
             onChange={handleChange}
             onBlur={handleBlur}
+            defaultValue={defaultValues}
         />
     );
 };

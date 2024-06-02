@@ -6,6 +6,8 @@ import { LogUpContainer } from "../log/log-up/LogUpContainer";
 import { CreateRoomContainer } from "../create/room/CreateRoomContainer";
 import { CreateTaskContainer } from "../create/task/CreateTaskContainer";
 import { TaskContainer } from "../task/TaskContainer";
+import { EditRoomContainer } from "../edit/room/EditRoomContainer";
+import { EditTaskContainer } from "../edit/task/EditTaskContainer";
 
 export const Router = () => {
     return (
@@ -20,6 +22,9 @@ export const Router = () => {
 
             <Route path={'/create/room'} element={<CreateRoomContainer />}/>
             <Route path={'/create/task'} element={<CreateTaskContainer />}/>
+
+            <Route path={'/edit/rooms/:id'} element={<EditRoomContainer />}/>
+            <Route path={'/edit/tasks/:id'} element={<EditTaskContainer />}/>
         </Routes>
     )
 }

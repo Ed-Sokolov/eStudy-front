@@ -1,16 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createRoom, getRooms } from "../../API/rooms";
+import { createRoom, getRoom, getRooms, updateRoom } from "../../API/rooms";
 import { type TRoom } from "../../type/Room";
+import { type TEditRoom } from "../../type/edit/Room";
+import type {TTaskItem} from "../../type/TaskItem";
 
 const initState = {
     rooms: null as TRoom[] | null,
+    room: null as TEditRoom | null,
     isLoading: false as boolean
 }
 
 const roomSlice = createSlice({
     name: 'rooms',
     initialState: initState,
-    reducers: {},
+    reducers: {
+        resetRoom(state) {
+            state.room = null
+        }
+    },
     extraReducers: builder => {
         builder
             .addCase(getRooms.pending, state => {
@@ -36,7 +43,33 @@ const roomSlice = createSlice({
 
                 throw action.payload;
             })
+            .addCase(getRoom.pending, state => {
+                state.isLoading = true;
+            })
+            .addCase(getRoom.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.room = action.payload;
+            })
+            .addCase(getRoom.rejected, (state, action) => {
+                state.isLoading = false;
+
+                throw action.payload;
+            })
+            .addCase(updateRoom.pending, state => {
+                state.isLoading = true;
+            })
+            .addCase(updateRoom.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.room = null;
+            })
+            .addCase(updateRoom.rejected, (state, action) => {
+                state.isLoading = false;
+
+                throw action.payload;
+            })
     }
 })
+
+export const { resetRoom } = roomSlice.actions;
 
 export default roomSlice.reducer;
