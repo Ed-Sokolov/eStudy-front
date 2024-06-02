@@ -34,9 +34,9 @@ export const CreateRoom: React.FC<
                                     </div>
 
                                     <div className="form-group">
-                                        <label htmlFor="people">People</label>
+                                        <label htmlFor="students">People</label>
 
-                                        <CustomSelect name="people" options={peopleOptions} isMulti={true} closeMenuOnSelect={false}/>
+                                        <CustomSelect name="students" options={peopleOptions} isMulti={true} closeMenuOnSelect={false}/>
                                     </div>
                                 </div>
 

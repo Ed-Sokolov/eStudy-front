@@ -2,6 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { instance } from "../instanse"
 import axios from "axios";
 import { type TUser } from "../../type/User";
+import type {TLogUpForm} from "../../type/log/LogUpForm";
 
 export const checkAuth = createAsyncThunk<TUser, undefined, {rejectValue: any}>(
     'auth/check',
@@ -28,8 +29,6 @@ export const login = createAsyncThunk<any, any, {rejectValue: any}>(
             await instance.get('/sanctum/csrf-cookie');
 
             const response = await instance.post('/login', data);
-
-            console.log(response);
         } catch (error) {
             if (axios.isAxiosError(error)) {
                 if (error.response && error.response.data)
@@ -46,8 +45,6 @@ export const logOut = createAsyncThunk<any, undefined, {rejectValue: any}>(
     async (_, {rejectWithValue}) => {
         try {
             const response = await instance.post('/logout');
-
-            console.log(response);
         } catch (error) {
             if (axios.isAxiosError(error)) {
                 if (error.response && error.response.data)
@@ -59,15 +56,13 @@ export const logOut = createAsyncThunk<any, undefined, {rejectValue: any}>(
     }
 )
 
-export const register = createAsyncThunk<any, any, {rejectValue: any}>(
+export const register = createAsyncThunk<any, TLogUpForm, {rejectValue: any}>(
     'auth/register',
     async (data, {rejectWithValue}) => {
         try {
             await instance.get('/sanctum/csrf-cookie');
 
             const response = await instance.post('/register', data);
-
-            console.log(response);
         } catch (error) {
             if (axios.isAxiosError(error)) {
                 if (error.response && error.response.data)

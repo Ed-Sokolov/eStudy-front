@@ -70,9 +70,6 @@ export const CreateTask: React.FC<
                                 <div className="form-group">
                                     <label htmlFor="attachments">Attachments</label>
 
-                                    {/*<Field type={'file'} name="attachments" as="input" id="attachments"*/}
-                                    {/*       className="input"></Field>*/}
-
                                     <Dropzone name={"attachments"} />
                                 </div>
 

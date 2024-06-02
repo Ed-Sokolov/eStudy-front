@@ -1,30 +1,43 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { CreateRoom } from "./CreateRoom";
+import { useAppDispatch, useAppSelector } from "../../../hooks";
+import { getStudents } from "../../../API/students";
+import { FormikHelpers } from "formik";
+import { createRoom } from "../../../API/rooms";
+import { useNavigate } from "react-router-dom";
 import { type TCreateRoom } from "../../../type/create/Room";
-import { type TSelectOption } from "../../../type/select/Option";
 
 export const CreateRoomContainer: React.FC = () => {
+    const
+        {
+            students
+        } = useAppSelector(state => state.student),
+        dispatch = useAppDispatch(),
+        navigate = useNavigate()
+
+    useEffect(() => {
+        dispatch(getStudents())
+    }, []);
+
     const initValues: TCreateRoom = {
         name: '',
-        user_id: 1,
-        people: [],
+        students: [],
     }
 
-    const submit = (values: TCreateRoom) => {
-        console.log(values);
+    const submit = (values: TCreateRoom, actions: FormikHelpers<TCreateRoom>) => {
+        dispatch(createRoom(values))
+            .then((res) => {
+                if (res.payload && res.payload.id)
+                {
+                    navigate(`/rooms/${res.payload.id}`)
+                }
+            })
+            .catch(error => {
+                for (const errorKey in error.errors) {
+                    actions.setFieldError(errorKey, error.errors[errorKey][0])
+                }
+            })
     }
 
-    const peopleOptions: TSelectOption[] = [
-        { value: '1', label: 'Eduard' },
-        { value: '2', label: 'Maxim' },
-        { value: '3', label: 'Misha' },
-        { value: '4', label: 'Andrew' },
-        { value: '5', label: 'Igor' },
-        { value: '6', label: 'Pasha' },
-        { value: '7', label: 'Oleg' },
-        { value: '8', label: 'Nastya' },
-        { value: '9', label: 'Alina' },
-    ]
-
-    return <CreateRoom initValues={initValues} submit={submit} peopleOptions={peopleOptions}/>
+    return <CreateRoom initValues={initValues} submit={submit} peopleOptions={students}/>
 }

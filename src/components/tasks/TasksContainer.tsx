@@ -25,7 +25,7 @@ export const TasksContainer: React.FC = () => {
         },
     ]
 
-    const {tasks} = useAppSelector(state => state.task);
+    const {tasks, roomName} = useAppSelector(state => state.task);
     const dispatch = useAppDispatch();
 
     const {id: roomId} = useParams();
@@ -40,7 +40,7 @@ export const TasksContainer: React.FC = () => {
         <>
             {
                 tasks
-                    ? <Tasks columns={columns} tasks={tasks} />
+                    ? <Tasks columns={columns} tasks={tasks} roomName={roomName} />
                     : <div>Loading...</div>
             }
         </>

@@ -1,16 +1,21 @@
 import React from "react";
 import "./../log.scss";
-import {Field, Form, Formik} from "formik";
-import { type TLogForm } from "../../../type/log/LogForm";
-import { type TLogUpForm } from "../../../type/log/LogUpForm";
+import { Field, Form, Formik } from "formik";
 import LogImg from "./../../../assets/img/log-img-1.jpg";
 import LogBackImg from "../../../assets/img/log-img-2.png";
-import {InputPassword} from "../../inputs/password";
+import { InputPassword } from "../../inputs/password";
+import { CustomSelect } from "../../inputs/select";
+import { type TLogForm } from "../../../type/log/LogForm";
+import { type TLogUpForm } from "../../../type/log/LogUpForm";
+import { type TSelectOption } from "../../../type/select/Option";
 
-export const LogUp: React.FC<TLogForm<TLogUpForm>> = (
+export const LogUp: React.FC<TLogForm<TLogUpForm> & {
+    groups: TSelectOption[]
+}> = (
     {
         initValues,
-        submit
+        submit,
+        groups
     }
 ) => {
     return (
@@ -24,7 +29,7 @@ export const LogUp: React.FC<TLogForm<TLogUpForm>> = (
                             {
                                 ({errors, touched, isValid}) => <Form className="log-form">
                                     <div className="form-group">
-                                        <label htmlFor="name">Your Name</label>
+                                        <label htmlFor="name">Your Full Name</label>
 
                                         <Field type={'text'} as={'input'} name={'name'} id={'name'}
                                                placeholder={'Your Name'} className="input"/>
@@ -39,6 +44,14 @@ export const LogUp: React.FC<TLogForm<TLogUpForm>> = (
                                     </div>
 
                                     <div className="form-group">
+                                        <label htmlFor="group_id">Select your group</label>
+
+                                        <CustomSelect name="group_id" options={groups}/>
+
+                                        <span className="hint">If you're <span>a student select your group</span></span>
+                                    </div>
+
+                                    <div className="form-group">
                                         <label htmlFor="password">Password</label>
 
                                         <InputPassword name={'password'} id={'password'} placeholder={'Your Password'}/>
@@ -46,7 +59,7 @@ export const LogUp: React.FC<TLogForm<TLogUpForm>> = (
 
                                     <div className="form-group">
                                         <label htmlFor="confirm_password">Repeat Password</label>
-                                        <Field type={'password'} as={'input'} name={'confirm_password'}
+                                        <Field type={'password'} as={'input'} name={'password_confirmation'}
                                                id={'confirm_password'} placeholder={'Repeat Your Password'}
                                                className="input"/>
                                     </div>
@@ -65,7 +78,7 @@ export const LogUp: React.FC<TLogForm<TLogUpForm>> = (
                 </div>
 
                 <div className="log__back">
-                <img src={LogImg} alt=""/>
+                    <img src={LogImg} alt=""/>
 
                     <div className="author">
                         Made by <span>Eduard Sokolov</span>

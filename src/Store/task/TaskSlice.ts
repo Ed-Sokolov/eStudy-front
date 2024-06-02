@@ -9,6 +9,7 @@ const initState = {
     info: null as TTaskInfo | null,
     tasks: null as TTaskItem[] | null,
     task: null as TTask | null,
+    roomName: '' as string,
     isLoading: false as boolean
 }
 
@@ -62,7 +63,8 @@ const taskSlice = createSlice({
             })
             .addCase(getRoomTasks.fulfilled, (state, action) => {
                 state.isLoading = false;
-                state.tasks = action.payload;
+                state.tasks = action.payload.tasks;
+                state.roomName = action.payload.roomName
             })
             .addCase(getRoomTasks.rejected, (state, action) => {
                 state.isLoading = false;

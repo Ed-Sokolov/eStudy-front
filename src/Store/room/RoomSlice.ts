@@ -1,6 +1,6 @@
-import {createSlice} from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
+import { createRoom, getRooms } from "../../API/rooms";
 import { type TRoom } from "../../type/Room";
-import {getRooms} from "../../API/rooms";
 
 const initState = {
     rooms: null as TRoom[] | null,
@@ -21,6 +21,17 @@ const roomSlice = createSlice({
                 state.rooms = action.payload;
             })
             .addCase(getRooms.rejected, (state, action) => {
+                state.isLoading = false;
+
+                throw action.payload;
+            })
+            .addCase(createRoom.pending, state => {
+                state.isLoading = true;
+            })
+            .addCase(createRoom.fulfilled, (state, action) => {
+                state.isLoading = false;
+            })
+            .addCase(createRoom.rejected, (state, action) => {
                 state.isLoading = false;
 
                 throw action.payload;

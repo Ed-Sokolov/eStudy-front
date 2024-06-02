@@ -4,11 +4,13 @@ import { ReactComponent as Divider } from "../../assets/img/divider.svg";
 
 type THeaderUser = {
     user: TUser
+    logOut: () => void
 }
 
 export const HeaderUser: React.FC<THeaderUser> = (
     {
-        user
+        user,
+        logOut
     }
 ) => {
     return (
@@ -22,7 +24,9 @@ export const HeaderUser: React.FC<THeaderUser> = (
                 </div>
             </li>
             <li className="header__log-item">
-                Log Out
+                <div className="link" onClick={logOut}>
+                    Log Out
+                </div>
             </li>
         </ul>
     )

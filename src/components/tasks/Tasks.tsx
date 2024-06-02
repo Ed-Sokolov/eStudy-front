@@ -7,18 +7,20 @@ import { type TTaskItem } from "../../type/TaskItem";
 export const Tasks: React.FC<
     {
         columns: TTasksColumn[]
-        tasks: TTaskItem[]
+        tasks: TTaskItem[],
+        roomName: string
     }
 > = (
     {
         columns,
-        tasks
+        tasks,
+        roomName
     }
 ) => {
     return (
         <div className="container">
             <div className="tasks">
-                <h1 className="title">WEB-Technology</h1>
+                <h1 className="title">{ roomName }</h1>
 
                 <ul className="tasks__columns">
                     {columns.map((column: TTasksColumn) => <li className="tasks__columns-item" key={column.id}>
