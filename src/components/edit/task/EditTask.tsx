@@ -1,18 +1,19 @@
 import React from "react";
-import { type TForm } from "../../../type/Form";
-import { type TCreateTask } from "../../../type/create/Task";
 import { Field, Form, Formik } from "formik";
 import "./../../create/create.scss";
-import { type TSelectOption } from "../../../type/select/Option";
 import { CustomSelect } from "../../inputs/select";
 import { ReactQuillWrapper } from "../../inputs/rich-textarea";
 import { Dropzone } from "../../dropzone/Dropzone";
+import { type TSelectOption } from "../../../type/select/Option";
+import { type TForm } from "../../../type/Form";
+import { type TEditTask } from "../../../type/edit/Task";
 
 export const EditTask: React.FC<
-    TForm<TCreateTask> & {
+    TForm<TEditTask> & {
         roomOptions: TSelectOption[]
         statusOptions: TSelectOption[]
         taskTypeOptions: TSelectOption[]
+        removeOldFile: (value: number) => void
     }
 > = (
     {
@@ -20,13 +21,19 @@ export const EditTask: React.FC<
         submit,
         taskTypeOptions,
         roomOptions,
-        statusOptions
+        statusOptions,
+        removeOldFile
     }
 ) => {
+    const
+        selectedRoom        = roomOptions.filter(roomOption => roomOption.value === initValues.room.id),
+        selectedStatus      = statusOptions.filter(statusOption => statusOption.value === initValues.status.id),
+        selectedTaskType    = taskTypeOptions.filter(taskTypeOption => taskTypeOption.value === initValues.type.id)
+
     return (
         <div className="container">
             <div className="creating-page">
-                <h1 className="title">Create a new task</h1>
+                <h1 className="title">Edit this task</h1>
 
                 <div className="form-wrapper">
                     <Formik initialValues={initValues} onSubmit={submit}>
@@ -43,7 +50,7 @@ export const EditTask: React.FC<
                                     <div className="form-group">
                                         <label htmlFor="room_id">Room</label>
 
-                                        <CustomSelect name="room_id" options={roomOptions}/>
+                                        <CustomSelect name="room_id" options={roomOptions} defaultValues={selectedRoom}/>
                                     </div>
                                 </div>
 
@@ -51,30 +58,30 @@ export const EditTask: React.FC<
                                     <div className="form-group">
                                         <label htmlFor="status_id">Status</label>
 
-                                        <CustomSelect name="status_id" options={statusOptions}/>
+                                        <CustomSelect name="status_id" options={statusOptions} defaultValues={selectedStatus}/>
                                     </div>
 
                                     <div className="form-group">
                                         <label htmlFor="type_id">Task Type</label>
 
-                                        <CustomSelect name="type_id" options={taskTypeOptions}/>
+                                        <CustomSelect name="type_id" options={taskTypeOptions} defaultValues={selectedTaskType}/>
                                     </div>
                                 </div>
 
                                 <div className="form-group">
                                     <label htmlFor="description">Description</label>
 
-                                    <ReactQuillWrapper name="description" id="description" placeholder="Description about this task" />
+                                    <ReactQuillWrapper initValue={initValues.content} name="description" id="description" placeholder="Description about this task" />
                                 </div>
 
                                 <div className="form-group">
                                     <label htmlFor="attachments">Attachments</label>
 
-                                    <Dropzone name={"attachments"} />
+                                    <Dropzone removeOldFile={removeOldFile} oldFiles={initValues.attachments} name={"new_attachments"} />
                                 </div>
 
                                 <div className="form-group">
-                                    <button type={'submit'} className="button">Create</button>
+                                    <button type={'submit'} className="button">Update</button>
                                 </div>
                             </Form>
                         }

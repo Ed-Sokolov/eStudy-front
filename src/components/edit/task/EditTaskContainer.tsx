@@ -1,40 +1,80 @@
-import React, { useEffect } from "react";
+import React, {useEffect, useState} from "react";
 import { EditTask } from "./EditTask";
-import { type TCreateTask } from "../../../type/create/Task";
 import { useAppDispatch, useAppSelector } from "../../../hooks";
-import { createTask, getInfo } from "../../../API/tasks";
+import {getEditedTask, getInfo, removeAttachment, updateTask} from "../../../API/tasks";
+import {useNavigate, useParams} from "react-router-dom";
+import {resetTask, updateLocaleAttachments} from "../../../Store/task/TaskSlice";
+import { FormikHelpers } from "formik";
+import { type TEditTask } from "../../../type/edit/Task";
 
 export const EditTaskContainer: React.FC = () => {
-    const {info} = useAppSelector(state => state.task);
-    const dispatch = useAppDispatch();
+    const
+        {
+            info,
+            task
+        } = useAppSelector(state => state.task),
+        dispatch = useAppDispatch(),
+        [ editedTask, setEditedTask ] = useState<TEditTask | null>(null),
+        navigate = useNavigate()
+
+    const { id } = useParams()
 
     useEffect(() => {
         dispatch(getInfo())
+
+        if (id && !isNaN(Number(id)))
+        {
+            dispatch(getEditedTask(Number(id)))
+                .then(() => {
+                    if (task)
+                    {
+                        setEditedTask({
+                            ...task,
+                            type_id: task.type.id,
+                            status_id: task.status.id,
+                            author_id: task.author.id,
+                            new_attachments: [],
+                            room_id: task.room.id,
+                            description: task.content
+                        })
+                    }
+                })
+        }
+
+        return () => {
+            // dispatch(resetTask())
+        }
     }, [])
 
-    const initValues: TCreateTask = {
-        name: '',
-        description: '',
-        room_id: 0,
-        author_id: 1,
-        type_id: 0,
-        status_id: 0,
-        attachments: []
+    const removeAttachmentHandler = (id: number) => {
+        dispatch(removeAttachment(id))
+            .then(() => {
+                dispatch(updateLocaleAttachments(id))
+            })
     }
 
-    const submit = (values: TCreateTask) => {
-        dispatch(createTask(values))
+    const submit = (values: TEditTask, actions: FormikHelpers<TEditTask>) => {
+        dispatch(updateTask(values))
+            .then(() => {
+                navigate(`/rooms/${values.room_id}/tasks/${values.id}`)
+            })
+            .catch(error => {
+                for (const errorKey in error.errors) {
+                    actions.setFieldError(errorKey, error.errors[errorKey][0])
+                }
+            })
     }
 
     return (
         <>
-            {info
+            {info && editedTask
                 ? <EditTask
-                        initValues={initValues}
+                        initValues={editedTask}
                         submit={submit}
                         roomOptions={info.rooms}
                         statusOptions={info.statuses}
                         taskTypeOptions={info.types}
+                        removeOldFile={removeAttachmentHandler}
                     />
                 : 'Loading...'
             }

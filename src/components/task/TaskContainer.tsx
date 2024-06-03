@@ -8,6 +8,7 @@ export const TaskContainer: React.FC = () => {
     const [currentTab, setCurrentTab] = useState<'content' | 'attachments'>('content')
 
     const { task } = useAppSelector(state => state.task)
+    const { user } = useAppSelector(state => state.auth)
     const dispatch = useAppDispatch();
 
     const { roomID, taskID} = useParams()
@@ -29,7 +30,7 @@ export const TaskContainer: React.FC = () => {
     return (
         <>
             {task
-                ? <Task task={task} currentTab={currentTab} setCurrentTab={setCurrentTab}/>
+                ? <Task user={user} task={task} currentTab={currentTab} setCurrentTab={setCurrentTab}/>
                 : <div>Loading...</div>
             }
         </>

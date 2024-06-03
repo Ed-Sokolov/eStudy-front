@@ -1,20 +1,26 @@
 import React from "react";
 import "./task.scss";
-import { type TTask as TTaskContent } from "../../type/Task";
 import parse from "html-react-parser";
 import { AttachmentList } from "./content/AttachmentList";
+import { NavLink } from "react-router-dom";
+import { type TTask as TTaskContent } from "../../type/Task";
+import { type TUser } from "../../type/User";
 
 type TTask = {
     currentTab: 'content' | 'attachments'
     setCurrentTab: (value: 'content' | 'attachments') => void
     task: TTaskContent
+    user: TUser | null
 }
 
 export const Task: React.FC<TTask> = ({
     currentTab,
     setCurrentTab,
-    task
+    task,
+    user
 }) => {
+    const isEditable = (user && user.role === 'administrator') || (user && user.id === task.author.id)
+
     return (
         <div className="container">
             <div className="task">
@@ -28,7 +34,13 @@ export const Task: React.FC<TTask> = ({
                     </div>
 
                     <div className="task__title-wrapper">
-                        <h1 className="task__title">{task.name}</h1>
+                        <h1 className="task__title">
+                            {task.name}
+
+                            {
+                                isEditable && <NavLink to={`/edit/tasks/${task.id}`} className={'room__link-edit'}>Edit</NavLink>
+                            }
+                        </h1>
 
                         <p className="task__title-subtitle">{task.type.name}</p>
                     </div>
@@ -48,7 +60,7 @@ export const Task: React.FC<TTask> = ({
 
                                     <div className="tab-item__count">
                                         <div className="tab-item__count-inner">
-                                            {task.attachments.length}
+                                            {task.attachments && task.attachments.length}
                                         </div>
                                     </div>
                                 </div>
@@ -65,7 +77,7 @@ export const Task: React.FC<TTask> = ({
 
                         <div className={`tab-item__content ${currentTab === 'attachments' && 'active'}`} data-tab-element="attachments">
                             {
-                                task.attachments.length > 0
+                                task.attachments && task.attachments.length > 0
                                     ? <AttachmentList attachments={task.attachments} />
                                     : <div>Empty</div>
                             }

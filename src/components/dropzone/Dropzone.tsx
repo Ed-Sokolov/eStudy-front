@@ -9,6 +9,8 @@ import { ReactComponent as ArchiveIcon } from "../../assets/img/files/archive.sv
 import { ReactComponent as TextIcon } from "../../assets/img/files/text.svg";
 import { ReactComponent as ExcelIcon } from "../../assets/img/files/excel.svg";
 import { ReactComponent as PointIcon } from "../../assets/img/files/point.svg";
+import { type TAttachment } from "../../type/Attachment";
+import {OldFiles} from "./files/Old";
 
 export interface DropzoneFile extends File {
     preview: string | ReactElement
@@ -16,6 +18,8 @@ export interface DropzoneFile extends File {
 
 type TDropzone = {
     name: string
+    oldFiles?: TAttachment[]
+    removeOldFile?: (value: number) => void
 }
 
 const fileFormats: string[] = [
@@ -48,7 +52,9 @@ const fileIcons: {[k in FileFormat]: ReactElement} = {
 
 export const Dropzone: React.FC<TDropzone> = (
     {
-        name
+        name,
+        oldFiles,
+        removeOldFile
     }
 ) => {
     const [files, setFiles] = useState<DropzoneFile[]>([])
@@ -129,6 +135,11 @@ export const Dropzone: React.FC<TDropzone> = (
             {
                 files.length > 0
                     && <AcceptedFiles files={files} removeFile={removeFile} />
+            }
+
+            {
+                (oldFiles && oldFiles.length > 0 && removeOldFile)
+                    && <OldFiles removeFile={removeOldFile} files={oldFiles} />
             }
         </div>
     )

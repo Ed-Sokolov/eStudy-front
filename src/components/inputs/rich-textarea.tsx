@@ -7,6 +7,7 @@ type TReactQuillWrapper = {
     name: string
     id: string
     placeholder: string
+    initValue?: string
 }
 
 export const ReactQuillWrapper: React.FC<TReactQuillWrapper> = (
@@ -14,6 +15,7 @@ export const ReactQuillWrapper: React.FC<TReactQuillWrapper> = (
         name,
         placeholder,
         id,
+        initValue
     }
 ) => {
     const { setFieldValue, setFieldTouched } = useFormikContext()
@@ -63,6 +65,7 @@ export const ReactQuillWrapper: React.FC<TReactQuillWrapper> = (
                        modules={modules}
                        formats={formats}
                        id={id}
+                       defaultValue={initValue}
                        placeholder={placeholder}
                        onChange={e => setFieldValue(name, e)}
                        onBlur={() => setFieldTouched(name, true)} />

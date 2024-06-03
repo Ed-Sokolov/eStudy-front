@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createTask, getInfo, getTask } from "../../API/tasks";
+import {createTask, getEditedTask, getInfo, getTask, removeAttachment, updateTask} from "../../API/tasks";
 import { getRoomTasks } from "../../API/rooms";
 import { type TTaskInfo } from "../../type/TaskInfo";
 import { type TTaskItem } from "../../type/TaskItem";
@@ -31,6 +31,17 @@ const taskSlice = createSlice({
 
                     return task
                 })
+            }
+        },
+        resetTask(state) {
+            state.task = null
+        },
+        updateLocaleAttachments(state, action) {
+            const id = action.payload
+
+            if (id && state.task && state.task.attachments)
+            {
+                state.task.attachments = state.task.attachments.filter(attachment => attachment.id !== id)
             }
         }
     },
@@ -84,9 +95,44 @@ const taskSlice = createSlice({
 
                 throw action.payload;
             })
+            .addCase(getEditedTask.pending, state => {
+                state.isLoading = true;
+            })
+            .addCase(getEditedTask.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.task = action.payload;
+            })
+            .addCase(getEditedTask.rejected, (state, action) => {
+                state.isLoading = false;
+
+                throw action.payload;
+            })
+            .addCase(removeAttachment.pending, state => {
+                state.isLoading = true;
+            })
+            .addCase(removeAttachment.fulfilled, (state, action) => {
+                state.isLoading = false;
+            })
+            .addCase(removeAttachment.rejected, (state, action) => {
+                state.isLoading = false;
+
+                throw action.payload;
+            })
+            .addCase(updateTask.pending, state => {
+                state.isLoading = true;
+            })
+            .addCase(updateTask.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.task = action.payload
+            })
+            .addCase(updateTask.rejected, (state, action) => {
+                state.isLoading = false;
+
+                throw action.payload;
+            })
     }
 })
 
-export const { updateLocalTaskStatus } = taskSlice.actions;
+export const { updateLocalTaskStatus, resetTask, updateLocaleAttachments } = taskSlice.actions;
 
 export default taskSlice.reducer;
