@@ -14,7 +14,7 @@ export const Room: React.FC<TRoom & {
         user
     }
 ) => {
-    let isEditable = (user && user.role === 'administrator') || (user && user.role === 'teacher' && user.id === author.id)
+    const isEditable = (user && user.role === 'administrator') || (user && user.role === 'teacher' && user.id === author.id)
 
     return (
         <div className="room">

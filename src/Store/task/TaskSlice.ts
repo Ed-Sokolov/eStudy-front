@@ -4,12 +4,13 @@ import { getRoomTasks } from "../../API/rooms";
 import { type TTaskInfo } from "../../type/TaskInfo";
 import { type TTaskItem } from "../../type/TaskItem";
 import { type TTask } from "../../type/Task";
+import { type TRoom } from "../../type/Room";
 
 const initState = {
     info: null as TTaskInfo | null,
     tasks: null as TTaskItem[] | null,
     task: null as TTask | null,
-    roomName: '' as string,
+    room: null as TRoom | null,
     isLoading: false as boolean
 }
 
@@ -64,7 +65,7 @@ const taskSlice = createSlice({
             .addCase(getRoomTasks.fulfilled, (state, action) => {
                 state.isLoading = false;
                 state.tasks = action.payload.tasks;
-                state.roomName = action.payload.roomName
+                state.room = action.payload.room
             })
             .addCase(getRoomTasks.rejected, (state, action) => {
                 state.isLoading = false;
