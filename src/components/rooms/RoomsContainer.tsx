@@ -20,7 +20,7 @@ export const RoomsContainer: React.FC = () => {
     return (
         <div className="container">
             <div className="rooms-page">
-                <h1 className="title">Your Rooms</h1>
+                <h1 className="title">Your Courses</h1>
 
                 {rooms !== null ?
                     <Rooms rooms={rooms} user={user} />

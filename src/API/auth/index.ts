@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { instance } from "../instanse"
 import axios from "axios";
 import { type TUser } from "../../type/User";
-import type {TLogUpForm} from "../../type/log/LogUpForm";
+import { type TLogUpForm } from "../../type/log/LogUpForm";
 
 export const checkAuth = createAsyncThunk<TUser, undefined, {rejectValue: any}>(
     'auth/check',

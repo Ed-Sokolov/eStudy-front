@@ -13,7 +13,7 @@ export const HeaderCreating: React.FC = () => {
             <div className="new__list-wrapper">
                 <ul className="new__list">
                     <li className="new__list-item">
-                        <NavLink to={'/create/room'} className={'link'}>Room</NavLink>
+                        <NavLink to={'/create/room'} className={'link'}>Course</NavLink>
                     </li>
                     <li className="new__list-item">
                         <NavLink to={'/create/task'} className={'link'}>Task</NavLink>

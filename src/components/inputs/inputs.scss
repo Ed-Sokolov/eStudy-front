@@ -90,6 +90,70 @@
   }
 }
 
+.field {
+  &-wrapper {
+    position: relative;
+
+    .input {
+      width: 100%;
+    }
+
+    &:has(.error_field) .input {
+      &-password {
+        svg {
+          right: 42px;
+        }
+      }
+    }
+  }
+}
+
+.error {
+  &_field {
+    position: absolute;
+    right: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  &_message {
+    position: absolute;
+    width: max-content;
+    right: 0;
+    top: 113%;
+
+    padding: 8px 12px;
+    border-radius: 4px;
+    background: #880000;
+    color: #fff;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition: opacity .3s, visibility .3s;
+  }
+
+  &_content {
+    position: relative;
+
+    svg {
+      width: 26px;
+      height: 26px;
+      cursor: pointer;
+
+      path {
+        fill: #880000;
+      }
+
+      &:hover ~ .error_message {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
+}
+
 .ql-editor {
   min-height: 256px;
 }
+

@@ -30,14 +30,14 @@ export const Header: React.FC<THeader> = (
 
                     <nav className="nav">
                         <ul className="menu">
-                            <li className="menu__item">
+                            {/* <li className="menu__item">
                                 <NavLink to={'/'} className={'link'}>
                                     Main
                                 </NavLink>
-                            </li>
+                            </li> */}
                             <li className="menu__item">
                                 <NavLink to={'/rooms'} className={'link'}>
-                                    Rooms
+                                    Courses
                                 </NavLink>
                             </li>
                         </ul>

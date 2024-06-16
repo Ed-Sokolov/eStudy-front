@@ -1,10 +1,12 @@
 import React from "react";
-import { type TForm } from "../../../type/Form";
-import { type TCreateRoom } from "../../../type/create/Room";
 import { Field, Form, Formik } from "formik";
 import "./../create.scss";
-import { type TSelectOption } from "../../../type/select/Option";
 import { CustomSelect } from "../../inputs/select";
+import { RoomSchema } from "../../../validation/Room";
+import { ErrorField } from "../../inputs/error";
+import { type TCreateRoom } from "../../../type/create/Room";
+import { type TForm } from "../../../type/Form";
+import { type TSelectOption } from "../../../type/select/Option";
 
 export const CreateRoom: React.FC<
     TForm<TCreateRoom> & {peopleOptions: TSelectOption[]}
@@ -18,22 +20,26 @@ export const CreateRoom: React.FC<
     return (
         <div className="container">
             <div className="creating-page">
-                <h1 className="title">Create a new room</h1>
+                <h1 className="title">Create a new Course</h1>
 
                 <div className="form-wrapper">
-                    <Formik initialValues={initValues} onSubmit={submit}>
+                    <Formik initialValues={initValues} onSubmit={submit} validationSchema={RoomSchema}>
                         {
                             ({errors, touched, isValid}) => <Form className={'form'}>
                                 <div className="form-row">
                                     <div className="form-group">
                                         <label htmlFor="name">Name</label>
 
-                                        <Field type={'text'} as={'input'} name={'name'} id={'name'}
+                                        <div className="field-wrapper">
+                                            <Field type={'text'} as={'input'} name={'name'} id={'name'}
                                                placeholder={'Room Name'} className="input"/>
+
+                                            {(errors.name && touched.name) && <ErrorField message={errors.name}/>}
+                                        </div>
                                     </div>
 
                                     <div className="form-group">
-                                        <label htmlFor="students">People</label>
+                                        <label htmlFor="students">Students</label>
 
                                         <CustomSelect name="students" options={peopleOptions} isMulti={true} closeMenuOnSelect={false}/>
                                     </div>
