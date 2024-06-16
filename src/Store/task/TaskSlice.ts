@@ -5,6 +5,7 @@ import { type TTaskInfo } from "../../type/TaskInfo";
 import { type TTaskItem } from "../../type/TaskItem";
 import { type TTask } from "../../type/Task";
 import { type TRoom } from "../../type/Room";
+import {createComment, removeComment} from "../../API/comments";
 
 const initState = {
     info: null as TTaskInfo | null,
@@ -126,6 +127,38 @@ const taskSlice = createSlice({
                 state.task = action.payload
             })
             .addCase(updateTask.rejected, (state, action) => {
+                state.isLoading = false;
+
+                throw action.payload;
+            })
+            .addCase(createComment.pending, state => {
+                state.isLoading = true;
+            })
+            .addCase(createComment.fulfilled, (state, action) => {
+                state.isLoading = false;
+
+                if (state.task)
+                {
+                    state.task.comments.push(action.payload)
+                }
+            })
+            .addCase(createComment.rejected, (state, action) => {
+                state.isLoading = false;
+
+                throw action.payload;
+            })
+            .addCase(removeComment.pending, state => {
+                state.isLoading = true;
+            })
+            .addCase(removeComment.fulfilled, (state, action) => {
+                state.isLoading = false;
+
+                if (state.task)
+                {
+                    state.task.comments = state.task.comments.filter(comment => comment.id !== action.payload)
+                }
+            })
+            .addCase(removeComment.rejected, (state, action) => {
                 state.isLoading = false;
 
                 throw action.payload;

@@ -1,12 +1,14 @@
 import React from "react";
 import "./../log.scss";
+import { Field, Form, Formik } from "formik";
+import { InputPassword } from "../../inputs/password";
+import { InputCheckbox } from "../../inputs/checkbox";
+import { ErrorField } from "../../inputs/error";
+import { LogInSchema } from "../../../validation/Auth";
 import { type TLogForm } from "../../../type/log/LogForm";
 import { type TLogInForm } from "../../../type/log/LogInForm";
-import {Field, Form, Formik} from "formik";
 import LogImg from "./../../../assets/img/log-img-1.jpg";
 import LogBackImg from "./../../../assets/img/log-img-2.png";
-import {InputPassword} from "../../inputs/password";
-import {InputCheckbox} from "../../inputs/checkbox";
 
 export const LogIn: React.FC<TLogForm<TLogInForm>> = (
     {
@@ -21,18 +23,27 @@ export const LogIn: React.FC<TLogForm<TLogInForm>> = (
                     <div className="log__content">
                         <h2 className="log__title">Welcome Back to<br/> Our <span>Sys</span>tem</h2>
 
-                        <Formik initialValues={initValues} onSubmit={submit}>
+                        <Formik initialValues={initValues} onSubmit={submit} validationSchema={LogInSchema}>
                             {
                                 ({errors, touched, isValid}) => <Form className="log-form">
                                     <div className="form-group">
                                         <label htmlFor="email">Email</label>
-                                        <Field type={'email'} as={'input'} name={'email'} id={'email'} placeholder={'Your Email'} className="input"/>
+
+                                        <div className="field-wrapper">
+                                            <Field type={'email'} as={'input'} name={'email'} id={'email'} placeholder={'Your Email'} className="input"/>
+
+                                            {(errors.email && touched.email) && <ErrorField message={errors.email}/>}
+                                        </div>
                                     </div>
 
                                     <div className="form-group">
                                         <label htmlFor="password">Password</label>
 
-                                        <InputPassword name={'password'} id={'password'} placeholder={'Your Password'} />
+                                        <div className="field-wrapper">
+                                            <InputPassword name={'password'} id={'password'} placeholder={'Your Password'} />
+
+                                            {(errors.password && touched.password) && <ErrorField message={errors.password}/>}
+                                        </div>
                                     </div>
 
                                     <div className="checkbox-group">

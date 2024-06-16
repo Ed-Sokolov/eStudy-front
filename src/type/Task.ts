@@ -1,6 +1,7 @@
 import { type TAuthor } from "./Author";
 import { type TInfo } from "./Info";
 import { type TAttachment } from "./Attachment";
+import { type TComment } from "./Comment";
 
 export type TTask = {
     id: number
@@ -12,4 +13,5 @@ export type TTask = {
     type: TInfo
     status: TInfo
     attachments: TAttachment[]
+    comments: TComment[]
 }

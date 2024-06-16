@@ -1,0 +1,75 @@
+.comment {
+  &-form {
+    padding: 16px;
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0 4px 50px rgba(0, 0, 0, 0.12);
+
+    .form {
+      &-group {
+        .button {
+          margin: 0;
+        }
+
+        .textarea {
+          resize: none;
+          padding: 8px;
+          outline: none;
+          border-radius: 4px;
+          border: 2px solid #5b855d;
+          width: 100%;
+          min-height: 128px;
+          font-size: 16px;
+        }
+      }
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow: hidden;
+    border-radius: 4px;
+
+    &-wrapper {
+      margin: 16px 0 0;
+      background: #cbe4c9;
+      border-radius: 4px;
+      box-shadow: 0 4px 50px rgba(0, 0, 0, 0.12);
+    }
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    padding: 4px 8px;
+    background: #fff;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 2px solid #efefef;
+    padding: 4px 8px 2px;
+  }
+
+  &__author {
+    font-size: 18px;
+    font-weight: 500;
+
+    &-wrapper {
+      flex-grow: 1;
+    }
+
+    &-date {
+      opacity: .8;
+      font-size: 12px;
+    }
+  }
+
+  &__content {
+    padding: 2px 8px 4px;
+  }
+}

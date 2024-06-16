@@ -1,23 +1,27 @@
 import React from "react";
 import "./task.scss";
 import parse from "html-react-parser";
-import { AttachmentList } from "./content/AttachmentList";
+import { AttachmentList } from "./attachments/AttachmentList";
 import { NavLink } from "react-router-dom";
 import { type TTask as TTaskContent } from "../../type/Task";
 import { type TUser } from "../../type/User";
+import {CreateCommentContainer} from "../comment/create/CreateCommentContainer";
+import {CommentListContainer} from "../comment/list/CommentListContainer";
 
 type TTask = {
     currentTab: 'content' | 'attachments'
     setCurrentTab: (value: 'content' | 'attachments') => void
     task: TTaskContent
     user: TUser | null
+    taskID: number
 }
 
 export const Task: React.FC<TTask> = ({
     currentTab,
     setCurrentTab,
     task,
-    user
+    user,
+    taskID
 }) => {
     const isEditable = (user && user.role === 'administrator') || (user && user.id === task.author.id)
 
@@ -84,6 +88,12 @@ export const Task: React.FC<TTask> = ({
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <div className="comment-area">
+                <CreateCommentContainer task_id={taskID} />
+
+                <CommentListContainer comments={task.comments} />
             </div>
         </div>
     )

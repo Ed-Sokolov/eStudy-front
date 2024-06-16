@@ -29,8 +29,8 @@ export const TaskContainer: React.FC = () => {
 
     return (
         <>
-            {task
-                ? <Task user={user} task={task} currentTab={currentTab} setCurrentTab={setCurrentTab}/>
+            {(task && (isCorrectID(taskID)))
+                ? <Task user={user} task={task} currentTab={currentTab} setCurrentTab={setCurrentTab} taskID={Number(taskID)}/>
                 : <div>Loading...</div>
             }
         </>

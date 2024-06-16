@@ -7,8 +7,8 @@ import { type TSelectOption } from "../../../type/select/Option";
 import { CustomSelect } from "../../inputs/select";
 import { ReactQuillWrapper } from "../../inputs/rich-textarea";
 import { Dropzone } from "../../dropzone/Dropzone";
-import {TaskSchema} from "../../../validation/Task";
-import {ErrorField} from "../../inputs/error";
+import { TaskSchema } from "../../../validation/Task";
+import { ErrorField } from "../../inputs/error";
 
 export const CreateTask: React.FC<
     TForm<TCreateTask> & {

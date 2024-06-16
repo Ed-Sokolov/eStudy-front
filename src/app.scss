@@ -50,6 +50,34 @@ img {
   vertical-align: center;
 }
 
+input,
+textarea {
+  font-family: "Poppins", sans-serif;
+  letter-spacing: 0.8px;
+
+  &::placeholder {
+    font-family: "Poppins", sans-serif;
+    letter-spacing: 0.8px;
+  }
+}
+
+textarea {
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #355534;
+    border-radius: 4px;
+    border: 1px solid transparent;
+    background-clip: content-box;
+  }
+}
+
 .container {
   margin: 0 auto;
   max-width: 1440px;
@@ -279,5 +307,19 @@ img {
         display: initial;
       }
     }
+  }
+}
+
+.comment {
+  &-area {
+    max-width: 780px;
+    margin: 32px auto;
+  }
+}
+
+.field-textarea-wrapper {
+  .error_field {
+    top: 4px;
+    transform: unset;
   }
 }
