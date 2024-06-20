@@ -3,7 +3,7 @@ import { EditRoom } from "./EditRoom";
 import { useAppDispatch, useAppSelector } from "../../../hooks";
 import { getStudents } from "../../../API/students";
 import { FormikHelpers } from "formik";
-import { getRoom, updateRoom } from "../../../API/rooms";
+import { getRoom, removeRoom, updateRoom } from "../../../API/rooms";
 import { useNavigate, useParams } from "react-router-dom";
 import { resetRoom } from "../../../Store/room/RoomSlice";
 import { type TEditRoom } from "../../../type/edit/Room";
@@ -49,7 +49,14 @@ export const EditRoomContainer: React.FC = () => {
             })
     }
 
+    const removeRoomHandler = (id: number) => {
+        dispatch(removeRoom(id))
+            .then(() => {
+                navigate('/rooms/')
+            })
+    }
+
     return room
-        ? <EditRoom initValues={room} submit={submit} peopleOptions={students}/>
+        ? <EditRoom initValues={room} submit={submit} peopleOptions={students} removeRoomHandler={removeRoomHandler}/>
         : <div>Loading...</div>
 }

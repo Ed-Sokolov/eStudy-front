@@ -14,6 +14,33 @@
     & > .room {
       //flex: 1;
       //min-width: 360px;
+
+      position: relative;
+
+      .room__link {
+        &-edit {
+          position: absolute;
+          top: 8px;
+          right: 8px;
+          z-index: 50;
+          display: inline-block;
+          margin: 0;
+
+          svg {
+            transition: transform .3s;
+
+            path {
+              stroke: white;
+            }
+          }
+
+          &:hover {
+            svg {
+              transform: scale(1.1);
+            }
+          }
+        }
+      }
     }
   }
 }

@@ -3,6 +3,7 @@ import "./../comment.scss";
 import { type TComment } from "../../../type/Comment";
 import { type TRemoveCommentHandler } from "../list/CommentListContainer";
 import { type TUser } from "../../../type/User";
+import { ReactComponent as RemoveIcon } from "../../../assets/img/trash.svg";
 
 type TCommentItem = {
     comment: TComment
@@ -33,10 +34,7 @@ export const CommentItem: React.FC<TCommentItem> = (
                 {
                     ((user && user.role === 'administrator') || (user && user.id === comment.author.id)) &&
                         <div className="comment__actions">
-
-                            <div className="comment__remove" onClick={() => removeComment(comment.id)}>
-                                remove
-                            </div>
+                            <RemoveIcon className="comment__remove" onClick={() => removeComment(comment.id)}/>
                         </div>
                 }
             </div>

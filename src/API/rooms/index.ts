@@ -81,3 +81,18 @@ export const updateRoom = createAsyncThunk<TRoom, TEditRoom, { rejectValue: any 
         }
     }
 )
+
+export const removeRoom = createAsyncThunk<any, number, { rejectValue: any }>(
+    'rooms/remove',
+    async (room_id, {rejectWithValue}) => {
+        try {
+            const response: AxiosResponse<any, any> = await instance.delete(`/api/rooms/${room_id}`);
+
+            return response.data.data;
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                return rejectWithValue(error.response?.data);
+            }
+        }
+    }
+)

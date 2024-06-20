@@ -3,10 +3,11 @@ import "./task.scss";
 import parse from "html-react-parser";
 import { AttachmentList } from "./attachments/AttachmentList";
 import { NavLink } from "react-router-dom";
+import { CreateCommentContainer } from "../comment/create/CreateCommentContainer";
+import { CommentListContainer } from "../comment/list/CommentListContainer";
 import { type TTask as TTaskContent } from "../../type/Task";
 import { type TUser } from "../../type/User";
-import {CreateCommentContainer} from "../comment/create/CreateCommentContainer";
-import {CommentListContainer} from "../comment/list/CommentListContainer";
+import { ReactComponent as EditIcon } from "../../assets/img/edit.svg";
 
 type TTask = {
     currentTab: 'content' | 'attachments'
@@ -42,7 +43,9 @@ export const Task: React.FC<TTask> = ({
                             {task.name}
 
                             {
-                                isEditable && <NavLink to={`/edit/tasks/${task.id}`} className={'room__link-edit'}>Edit</NavLink>
+                                isEditable && <NavLink to={`/edit/tasks/${task.id}`} className={'room__link-edit'}>
+                                    <EditIcon />
+                                </NavLink>
                             }
                         </h1>
 

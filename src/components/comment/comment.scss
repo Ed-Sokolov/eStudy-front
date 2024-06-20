@@ -72,4 +72,14 @@
   &__content {
     padding: 2px 8px 4px;
   }
+
+  &__remove {
+    cursor: pointer;
+    width: 22px;
+    transition: transform .3s;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
 }

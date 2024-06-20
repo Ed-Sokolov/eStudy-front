@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { EditTask } from "./EditTask";
 import { useAppDispatch, useAppSelector } from "../../../hooks";
-import {getEditedTask, getInfo, removeAttachment, updateTask} from "../../../API/tasks";
-import {useNavigate, useParams} from "react-router-dom";
-import {resetTask, updateLocaleAttachments} from "../../../Store/task/TaskSlice";
+import { getEditedTask, getInfo, removeAttachment, removeTask, updateTask } from "../../../API/tasks";
+import { useNavigate, useParams } from "react-router-dom";
+import { resetTask, updateLocaleAttachments } from "../../../Store/task/TaskSlice";
 import { FormikHelpers } from "formik";
 import { type TEditTask } from "../../../type/edit/Task";
 
@@ -65,6 +65,13 @@ export const EditTaskContainer: React.FC = () => {
             })
     }
 
+    const removeTaskHandler = (id: number) => {
+        dispatch(removeTask(id))
+            .then(() => {
+                navigate('/rooms/')
+            })
+    }
+
     return (
         <>
             {info && editedTask
@@ -75,6 +82,7 @@ export const EditTaskContainer: React.FC = () => {
                         statusOptions={info.statuses}
                         taskTypeOptions={info.types}
                         removeOldFile={removeAttachmentHandler}
+                        removeTaskHandler={removeTaskHandler}
                     />
                 : 'Loading...'
             }

@@ -323,3 +323,16 @@ textarea {
     transform: unset;
   }
 }
+
+.remove {
+  &__icon {
+    margin: 0 auto;
+    width: 24px;
+    cursor: pointer;
+    transition: transform .3s;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}

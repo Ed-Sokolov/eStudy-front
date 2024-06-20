@@ -1,8 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createRoom, getRoom, getRooms, updateRoom } from "../../API/rooms";
+import { createRoom, getRoom, getRooms, removeRoom, updateRoom } from "../../API/rooms";
 import { type TRoom } from "../../type/Room";
 import { type TEditRoom } from "../../type/edit/Room";
-import type {TTaskItem} from "../../type/TaskItem";
 
 const initState = {
     rooms: null as TRoom[] | null,
@@ -63,6 +62,19 @@ const roomSlice = createSlice({
                 state.room = null;
             })
             .addCase(updateRoom.rejected, (state, action) => {
+                state.isLoading = false;
+
+                throw action.payload;
+            })
+            .addCase(removeRoom.pending, state => {
+                state.isLoading = true;
+            })
+            .addCase(removeRoom.fulfilled, (state, action) => {
+                state.isLoading = false;
+
+                state.room = null
+            })
+            .addCase(removeRoom.rejected, (state, action) => {
                 state.isLoading = false;
 
                 throw action.payload;

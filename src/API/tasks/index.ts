@@ -146,3 +146,18 @@ export const updateTask = createAsyncThunk<TTask, TEditTask, { rejectValue: any 
         }
     }
 )
+
+export const removeTask = createAsyncThunk<any, number, { rejectValue: any }>(
+    'tasks/remove',
+    async (task_id, {rejectWithValue}) => {
+        try {
+            const response: AxiosResponse<any, any> = await instance.delete(`/api/tasks/${task_id}`);
+
+            return response.data.data;
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                return rejectWithValue(error.response?.data);
+            }
+        }
+    }
+)

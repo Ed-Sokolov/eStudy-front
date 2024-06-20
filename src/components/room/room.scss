@@ -35,6 +35,18 @@
 
     &-edit {
       z-index: 50;
+      display: inline-block;
+      margin: 0 8px;
+
+      svg {
+        transition: transform .3s;
+      }
+
+      &:hover {
+        svg {
+          transform: scale(1.1);
+        }
+      }
     }
   }
 

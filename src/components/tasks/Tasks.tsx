@@ -6,6 +6,7 @@ import { type TTasksColumn } from "../../type/TasksColumn";
 import { type TTaskItem } from "../../type/TaskItem";
 import { type TUser } from "../../type/User";
 import { type TRoom } from "../../type/Room";
+import { ReactComponent as EditIcon } from "../../assets/img/edit.svg";
 
 export const Tasks: React.FC<
     {
@@ -31,7 +32,9 @@ export const Tasks: React.FC<
                     { room.name }
 
                     {
-                        isEditable && <NavLink to={`/edit/rooms/${room.id}`} className={'room__link-edit'}>Edit</NavLink>
+                        isEditable && <NavLink to={`/edit/rooms/${room.id}`} className={'room__link-edit'}>
+                            <EditIcon />
+                        </NavLink>
                     }
                 </h1>
 

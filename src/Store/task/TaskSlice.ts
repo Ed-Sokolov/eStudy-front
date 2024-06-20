@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {createTask, getEditedTask, getInfo, getTask, removeAttachment, updateTask} from "../../API/tasks";
+import { createTask, getEditedTask, getInfo, getTask, removeAttachment, removeTask, updateTask } from "../../API/tasks";
+import { createComment, removeComment } from "../../API/comments";
 import { getRoomTasks } from "../../API/rooms";
 import { type TTaskInfo } from "../../type/TaskInfo";
 import { type TTaskItem } from "../../type/TaskItem";
 import { type TTask } from "../../type/Task";
 import { type TRoom } from "../../type/Room";
-import {createComment, removeComment} from "../../API/comments";
 
 const initState = {
     info: null as TTaskInfo | null,
@@ -159,6 +159,19 @@ const taskSlice = createSlice({
                 }
             })
             .addCase(removeComment.rejected, (state, action) => {
+                state.isLoading = false;
+
+                throw action.payload;
+            })
+            .addCase(removeTask.pending, state => {
+                state.isLoading = true;
+            })
+            .addCase(removeTask.fulfilled, (state, action) => {
+                state.isLoading = false;
+
+                state.task = null
+            })
+            .addCase(removeTask.rejected, (state, action) => {
                 state.isLoading = false;
 
                 throw action.payload;

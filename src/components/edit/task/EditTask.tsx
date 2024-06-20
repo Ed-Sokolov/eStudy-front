@@ -7,6 +7,7 @@ import { Dropzone } from "../../dropzone/Dropzone";
 import { type TSelectOption } from "../../../type/select/Option";
 import { type TForm } from "../../../type/Form";
 import { type TEditTask } from "../../../type/edit/Task";
+import { ReactComponent as RemoveIcon } from "../../../assets/img/trash.svg";
 
 export const EditTask: React.FC<
     TForm<TEditTask> & {
@@ -14,6 +15,7 @@ export const EditTask: React.FC<
         statusOptions: TSelectOption[]
         taskTypeOptions: TSelectOption[]
         removeOldFile: (value: number) => void
+        removeTaskHandler: (id: number) => void
     }
 > = (
     {
@@ -22,7 +24,8 @@ export const EditTask: React.FC<
         taskTypeOptions,
         roomOptions,
         statusOptions,
-        removeOldFile
+        removeOldFile,
+        removeTaskHandler
     }
 ) => {
     const
@@ -50,7 +53,8 @@ export const EditTask: React.FC<
                                     <div className="form-group">
                                         <label htmlFor="room_id">Room</label>
 
-                                        <CustomSelect name="room_id" options={roomOptions} defaultValues={selectedRoom}/>
+                                        <CustomSelect name="room_id" options={roomOptions}
+                                                      defaultValues={selectedRoom}/>
                                     </div>
                                 </div>
 
@@ -58,30 +62,38 @@ export const EditTask: React.FC<
                                     <div className="form-group">
                                         <label htmlFor="status_id">Status</label>
 
-                                        <CustomSelect name="status_id" options={statusOptions} defaultValues={selectedStatus}/>
+                                        <CustomSelect name="status_id" options={statusOptions}
+                                                      defaultValues={selectedStatus}/>
                                     </div>
 
                                     <div className="form-group">
                                         <label htmlFor="type_id">Task Type</label>
 
-                                        <CustomSelect name="type_id" options={taskTypeOptions} defaultValues={selectedTaskType}/>
+                                        <CustomSelect name="type_id" options={taskTypeOptions}
+                                                      defaultValues={selectedTaskType}/>
                                     </div>
                                 </div>
 
                                 <div className="form-group">
                                     <label htmlFor="description">Description</label>
 
-                                    <ReactQuillWrapper initValue={initValues.content} name="description" id="description" placeholder="Description about this task" />
+                                    <ReactQuillWrapper initValue={initValues.content} name="description"
+                                                       id="description" placeholder="Description about this task"/>
                                 </div>
 
                                 <div className="form-group">
                                     <label htmlFor="attachments">Attachments</label>
 
-                                    <Dropzone removeOldFile={removeOldFile} oldFiles={initValues.attachments} name={"new_attachments"} />
+                                    <Dropzone removeOldFile={removeOldFile} oldFiles={initValues.attachments}
+                                              name={"new_attachments"}/>
                                 </div>
 
                                 <div className="form-group">
                                     <button type={'submit'} className="button">Update</button>
+                                </div>
+
+                                <div className="form-group">
+                                    <RemoveIcon className="remove__icon" onClick={() => removeTaskHandler(initValues.id)}/>
                                 </div>
                             </Form>
                         }
