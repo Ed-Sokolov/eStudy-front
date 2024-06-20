@@ -1,12 +1,15 @@
 import React, { useEffect } from "react";
 import { CreateTask } from "./CreateTask";
-import { type TCreateTask } from "../../../type/create/Task";
 import { useAppDispatch, useAppSelector } from "../../../hooks";
 import { createTask, getInfo } from "../../../API/tasks";
+import { useNavigate } from "react-router-dom";
+import { type TCreateTask } from "../../../type/create/Task";
 
 export const CreateTaskContainer: React.FC = () => {
     const {info} = useAppSelector(state => state.task);
-    const dispatch = useAppDispatch();
+    const
+        dispatch = useAppDispatch(),
+        navigate = useNavigate()
 
     useEffect(() => {
         dispatch(getInfo())
@@ -24,6 +27,12 @@ export const CreateTaskContainer: React.FC = () => {
 
     const submit = (values: TCreateTask) => {
         dispatch(createTask(values))
+            .then(res => {
+                if (res.payload)
+                {
+                    navigate(`/rooms/${values.room_id}/tasks/${res.payload}`)
+                }
+            })
     }
 
     return (
